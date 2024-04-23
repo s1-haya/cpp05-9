@@ -2,7 +2,4 @@
 
 void testBureaucrat(void);
 
-void runTest(void)
-{
-	testBureaucrat();
-}
+void runTest(void) { testBureaucrat(); }
