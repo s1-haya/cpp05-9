@@ -8,3 +8,7 @@ RobotomyRequestForm::RobotomyRequestForm()
             ROBOTOMY_REQUEST_EXEC_GRADE) {}
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
+
+void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
+	std::cout << executor.getName() << std::endl;
+}

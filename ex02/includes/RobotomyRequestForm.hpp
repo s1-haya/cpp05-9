@@ -7,6 +7,7 @@ class RobotomyRequestForm : public AForm {
 public:
   RobotomyRequestForm();
   ~RobotomyRequestForm();
+  void execute(Bureaucrat const &executor) const;
 };
 
 #endif

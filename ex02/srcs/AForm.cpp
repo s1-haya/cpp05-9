@@ -1,12 +1,17 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 AForm::AForm()
     : name_("default"), isSign_(false), signGrade_(LOWEST_GRADE),
       execGrade_(LOWEST_GRADE) {}
 
+AForm::AForm(const std::string name)
+    : name_(name), isSign_(false), signGrade_(LOWEST_GRADE),
+      execGrade_(LOWEST_GRADE) {}
+
 AForm::AForm(const std::string name, unsigned int signGrade,
-           unsigned int execGrade)
+             unsigned int execGrade)
     : name_(name), isSign_(false), signGrade_(signGrade),
       execGrade_(execGrade) {
   try {
@@ -55,10 +60,24 @@ void AForm::beSigned(const Bureaucrat &bureaucrat) {
   }
 }
 
+void AForm::checkExecute(bool isSign, const unsigned int signGrade,
+                         const unsigned int execGrade) const {
+  if (isSign) {
+    if (!(this->signGrade_ <= signGrade && this->execGrade_ <= execGrade))
+      throw(AForm::GradeTooLowException());
+  } else {
+    throw(AForm::UnsignedException());
+  }
+}
+
 const char *AForm::GradeTooHighException::what() const throw() {
-  return ("AForm: Grade is too high");
+  return ("Exception: Form's grade is too high");
 }
 
 const char *AForm::GradeTooLowException::what() const throw() {
-  return ("AForm: Grade is too low");
+  return ("Exception: Form's grade is too low");
+}
+
+const char *AForm::UnsignedException::what() const throw() {
+  return ("Exception: Form is unsigned ... ");
 }

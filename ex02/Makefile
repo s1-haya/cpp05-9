@@ -6,7 +6,7 @@ CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MP
 SRCS_DIR := srcs
 SRCS := main.cpp\
 		$(SRCS_DIR)/Bureaucrat.cpp\
-		$(SRCS_DIR)/Form.cpp\
+		$(SRCS_DIR)/AForm.cpp\
 		$(SRCS_DIR)/ShrubberyCreationForm.cpp\
 		$(SRCS_DIR)/RobotomyRequestForm.cpp\
 		$(SRCS_DIR)/PresidentialPardonForm.cpp\
@@ -19,7 +19,6 @@ TEST_DIR := test
 SRCS += $(TEST_DIR)/test.cpp\
 		$(TEST_DIR)/testTitle.cpp\
 		$(TEST_DIR)/testBureaucrat.cpp\
-		$(TEST_DIR)/testForm.cpp\
 		$(TEST_DIR)/testShrubberyCreationForm.cpp\
 		$(TEST_DIR)/testRobotomyRequestForm.cpp\
 		$(TEST_DIR)/testPresidentialPardonForm.cpp\

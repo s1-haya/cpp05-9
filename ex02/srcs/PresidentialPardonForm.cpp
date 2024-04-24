@@ -1,10 +1,14 @@
 #include "PresidentialPardonForm.hpp"
 
-#define ROBOTOMY_REQUEST_SIGN_GRADE 25
-#define ROBOTOMY_REQUEST_EXEC_GRADE 5
+#define PRESIDENTIAL_PARDON_SIGN_GRADE 25
+#define PRESIDENTIAL_PARDON_EXEC_GRADE 5
 
 PresidentialPardonForm::PresidentialPardonForm()
-    : AForm("default", ROBOTOMY_REQUEST_SIGN_GRADE,
-            ROBOTOMY_REQUEST_EXEC_GRADE) {}
+    : AForm("default", PRESIDENTIAL_PARDON_SIGN_GRADE,
+            PRESIDENTIAL_PARDON_EXEC_GRADE) {}
 
 PresidentialPardonForm::~PresidentialPardonForm() {}
+
+void PresidentialPardonForm::execute(Bureaucrat const &executor) const {
+	std::cout << executor.getName() << std::endl;
+}

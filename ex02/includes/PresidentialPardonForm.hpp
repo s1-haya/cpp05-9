@@ -7,6 +7,7 @@ class PresidentialPardonForm : public AForm {
 public:
   PresidentialPardonForm();
   ~PresidentialPardonForm();
+  void execute(Bureaucrat const &executor) const;
 };
 
 #endif
