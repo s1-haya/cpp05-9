@@ -30,8 +30,9 @@ void ShrubberyCreationForm::action(Bureaucrat const &executor) const {
   std::cout << fileName << " file created by " << executor.getName()
             << std::endl;
   std::ofstream outputFile(fileName);
+  if (outputFile.fail()) {
+    std::cerr << "Error: faild to create " << fileName << std::endl;
+  }
   outputFile << "writes ASCII trees";
   outputFile.close();
-  // std::cout << this->getName() << " signed by " << executor.getName()
-  //           << std::endl;
 }
