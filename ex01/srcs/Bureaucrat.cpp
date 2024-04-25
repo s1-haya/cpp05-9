@@ -11,7 +11,7 @@ Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : name_(name) {
       throw Bureaucrat::GradeTooHighException();
     } else
       this->grade_ = grade;
-  } catch (const std::exception &e) {
+  } catch (const std::out_of_range &e) {
     std::cout << e.what() << std::endl;
   }
 }
@@ -24,7 +24,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
       throw Bureaucrat::GradeTooHighException();
     } else
       this->grade_ = other.grade_;
-  } catch (const std::exception &e) {
+  } catch (const std::out_of_range &e) {
     std::cout << e.what() << std::endl;
   }
   return (*this);
@@ -38,7 +38,7 @@ void Bureaucrat::incrementGrade() {
       throw Bureaucrat::GradeTooHighException();
     } else
       this->grade_--;
-  } catch (const std::exception &e) {
+  } catch (const std::out_of_range &e) {
     std::cout << e.what() << std::endl;
   }
 }
@@ -49,7 +49,7 @@ void Bureaucrat::decrementGrade() {
       throw Bureaucrat::GradeTooLowException();
     } else
       this->grade_++;
-  } catch (const std::exception &e) {
+  } catch (const std::out_of_range &e) {
     std::cout << e.what() << std::endl;
   }
 }

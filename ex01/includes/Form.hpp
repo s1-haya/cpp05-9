@@ -23,11 +23,11 @@ public:
   unsigned int getSignGrade(void) const;
   unsigned int getExecGrade(void) const;
   void beSigned(const Bureaucrat &bureaucrat);
-  class GradeTooHighException : public std::exception {
+  class GradeTooHighException : public std::out_of_range {
   public:
     const char *what() const throw();
   };
-  class GradeTooLowException : public std::exception {
+  class GradeTooLowException : public std::out_of_range {
   public:
     const char *what() const throw();
   };

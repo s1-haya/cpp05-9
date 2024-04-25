@@ -14,7 +14,7 @@ Form::Form(const std::string name, unsigned int signGrade,
       throw(Form::GradeTooLowException());
     else if (HIGHEST_GRADE > signGrade || HIGHEST_GRADE > signGrade)
       throw(Form::GradeTooHighException());
-  } catch (const std::exception &e) {
+  } catch (const std::out_of_range &e) {
     std::cerr << e.what() << std::endl;
   }
 }
@@ -50,7 +50,7 @@ void Form::beSigned(const Bureaucrat &bureaucrat) {
     } else {
       throw(Form::GradeTooLowException());
     }
-  } catch (const std::exception &e) {
+  } catch (const std::out_of_range &e) {
     std::cerr << e.what() << std::endl;
   }
 }

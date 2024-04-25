@@ -1,8 +1,8 @@
 #ifndef EX00_BUREAUCRAT_HPP_
 #define EX00_BUREAUCRAT_HPP_
 
-#include <exception>
 #include <iostream>
+#include <stdexcept>
 
 #define HIGHEST_GRADE 1
 #define LOWEST_GRADE 150

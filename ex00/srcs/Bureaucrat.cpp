@@ -2,29 +2,12 @@
 
 Bureaucrat::Bureaucrat() : name_("default"), grade_(LOWEST_GRADE) {}
 
-Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : name_(name) {
-  try {
-    if (HIGHEST_GRADE > grade) {
-      throw Bureaucrat::GradeTooLowException();
-    } else if (LOWEST_GRADE < grade) {
-      throw Bureaucrat::GradeTooHighException();
-    } else
-      this->grade_ = grade;
-  } catch (const std::exception &e) {
-    std::cout << e.what() << std::endl;
-  }
-}
+Bureaucrat::Bureaucrat(std::string name, unsigned int grade)
+    : name_(name), grade_(grade) {}
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
-  try {
-    if (HIGHEST_GRADE > other.grade_) {
-      throw Bureaucrat::GradeTooLowException();
-    } else if (LOWEST_GRADE < other.grade_) {
-      throw Bureaucrat::GradeTooHighException();
-    } else
-      this->grade_ = other.grade_;
-  } catch (const std::exception &e) {
-    std::cout << e.what() << std::endl;
+  if (this != &other) {
+    this->grade_ = other.grade_;
   }
   return (*this);
 }
@@ -63,9 +46,9 @@ std::ostream &operator<<(std::ostream &os, const Bureaucrat &data) {
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const throw() {
-  return ("This grade will not increase any more.");
+  return ("Exception: Bureaucrat's grade is too high");
 }
 
 const char *Bureaucrat::GradeTooLowException::what() const throw() {
-  return ("This grade will not decrease any more.");
+  return ("Exception: Bureaucrat's grade is too low");
 }

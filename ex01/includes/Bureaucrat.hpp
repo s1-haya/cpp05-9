@@ -1,8 +1,8 @@
 #ifndef EX01_BUREAUCRAT_HPP_
 #define EX01_BUREAUCRAT_HPP_
 
-#include <exception>
 #include <iostream>
+#include <stdexcept>
 
 #define HIGHEST_GRADE 1
 #define LOWEST_GRADE 150
@@ -24,11 +24,11 @@ public:
   const std::string getName() const;
   unsigned int getGrade() const;
   void signForm(const Form &form);
-  class GradeTooHighException : public std::exception {
+  class GradeTooHighException : public std::out_of_range {
   public:
     const char *what() const throw();
   };
-  class GradeTooLowException : public std::exception {
+  class GradeTooLowException : public std::out_of_range {
   public:
     const char *what() const throw();
   };

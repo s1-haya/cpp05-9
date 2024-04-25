@@ -31,23 +31,7 @@ void testBureaucrat(void) {
 
   testTitle("TEST BUREAUCRAT ERROR");
   Bureaucrat intMax("int max", -1);
-  try {
-    if (HIGHEST_GRADE > intMax.getGrade())
-      throw Bureaucrat::GradeTooHighException();
-    else if (LOWEST_GRADE < intMax.getGrade())
-      throw Bureaucrat::GradeTooLowException();
-  } catch (const std::exception &e) {
-    std::cerr << e.what() << '\n';
-  }
   std::cout << intMax << std::endl;
   Bureaucrat zero("zero", 0);
-  try {
-    if (HIGHEST_GRADE > zero.getGrade())
-      throw Bureaucrat::GradeTooHighException();
-    else if (LOWEST_GRADE < zero.getGrade())
-      throw Bureaucrat::GradeTooLowException();
-  } catch (const std::exception &e) {
-    std::cerr << e.what() << '\n';
-  }
   std::cout << zero << std::endl;
 }
