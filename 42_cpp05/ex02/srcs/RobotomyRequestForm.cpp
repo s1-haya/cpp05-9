@@ -21,12 +21,11 @@ RobotomyRequestForm::RobotomyRequestForm(std::string target)
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
     : AForm("RobotomyRequestForm", ROBOTOMY_REQUEST_SIGN_GRADE,
             ROBOTOMY_REQUEST_EXEC_GRADE),
-      target_(other.target_) {}
+      target_(other.target_ + "_copy") {}
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(
     const RobotomyRequestForm &other) {
-  if (this != &other)
-    this->target_ = other.target_;
+  if (this != &other) this->target_ = other.target_;
   return (*this);
 }
 

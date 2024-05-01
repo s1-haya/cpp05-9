@@ -19,7 +19,7 @@ PresidentialPardonForm::PresidentialPardonForm(
     const PresidentialPardonForm &other)
     : AForm("PresidentialPardonForm", PRESIDENTIAL_PARDON_SIGN_GRADE,
             PRESIDENTIAL_PARDON_EXEC_GRADE),
-      target_(other.target_) {}
+      target_(other.target_ + "_copy") {}
 
 PresidentialPardonForm &PresidentialPardonForm::operator=(
     const PresidentialPardonForm &other) {

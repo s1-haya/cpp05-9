@@ -20,7 +20,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string target)
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
     : AForm("ShrubberyCreationForm", SHRUBBERY_CREATION_SIGN_GRADE,
             SHRUBBERY_CREATION_EXEC_GRADE),
-      target_(other.target_) {}
+      target_(other.target_ + "_copy") {}
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(
     const ShrubberyCreationForm &other) {
@@ -45,8 +45,8 @@ void ShrubberyCreationForm::executeAction(Bureaucrat const &executor) const {
   if (outputFile.fail()) {
     std::cerr << "Error: faild to create " << fileName << std::endl;
     return;
-  std::cout << fileName << " file created by " << executor.getName()
-            << std::endl;
+    std::cout << fileName << " file created by " << executor.getName()
+              << std::endl;
   }
 
   outputFile

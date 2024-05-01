@@ -28,7 +28,7 @@ AForm::AForm(const std::string name, unsigned int signGrade,
 }
 
 AForm::AForm(const AForm &other)
-    : name_(other.name_),
+    : name_(other.name + "_copy"),
       isSign_(other.isSign_),
       signGrade_(other.signGrade_),
       execGrade_(other.execGrade_) {

@@ -20,7 +20,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string target)
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
     : AForm("ShrubberyCreationForm", SHRUBBERY_CREATION_SIGN_GRADE,
             SHRUBBERY_CREATION_EXEC_GRADE),
-      target_(other.target_) {}
+      target_(other.target_ + "_copy") {}
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(
     const ShrubberyCreationForm &other) {
