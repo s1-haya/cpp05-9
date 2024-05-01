@@ -13,10 +13,12 @@ private:
   bool isSign_;
   const unsigned int signGrade_;
   const unsigned int execGrade_;
+  Form &operator=(const Form &other);
 
 public:
   Form(void);
   Form(const std::string name, unsigned int signGrade, unsigned int execGrade);
+  Form(const Form& other);
   ~Form(void);
   const std::string getName(void) const;
   bool getIsSign(void) const;
@@ -25,11 +27,11 @@ public:
   void beSigned(const Bureaucrat &bureaucrat);
   class GradeTooHighException : public std::out_of_range {
   public:
-    const char *what() const throw();
+    GradeTooHighException();
   };
   class GradeTooLowException : public std::out_of_range {
   public:
-    const char *what() const throw();
+    GradeTooLowException();
   };
 };
 

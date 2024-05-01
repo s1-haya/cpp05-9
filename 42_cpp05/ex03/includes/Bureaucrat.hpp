@@ -1,5 +1,5 @@
-#ifndef EX02_BUREAUCRAT_HPP_
-#define EX02_BUREAUCRAT_HPP_
+#ifndef EX03_BUREAUCRAT_HPP_
+#define EX03_BUREAUCRAT_HPP_
 
 #include <iostream>
 
@@ -9,27 +9,29 @@
 class AForm;
 
 class Bureaucrat {
-private:
+ private:
   const std::string name_;
   unsigned int grade_;
-
-public:
-  Bureaucrat();
-  Bureaucrat(const std::string name, unsigned int grade);
   Bureaucrat &operator=(const Bureaucrat &other);
+
+ public:
+  Bureaucrat();
+  Bureaucrat(const std::string name);
+  Bureaucrat(const std::string name, unsigned int grade);
+  Bureaucrat(const Bureaucrat &other);
   ~Bureaucrat();
   void incrementGrade();
   void decrementGrade();
   const std::string &getName() const;
   unsigned int getGrade() const;
-  void signForm(const AForm &form);
+  void signForm(AForm form);
   void executeForm(AForm const &form);
   class GradeTooHighException : public std::out_of_range {
-  public:
+   public:
     GradeTooHighException();
   };
   class GradeTooLowException : public std::out_of_range {
-  public:
+   public:
     GradeTooLowException();
   };
 };

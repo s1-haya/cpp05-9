@@ -12,17 +12,19 @@ class Bureaucrat {
 private:
   const std::string name_;
   unsigned int grade_;
+  Bureaucrat &operator=(const Bureaucrat &other);
 
 public:
   Bureaucrat();
+  Bureaucrat(const std::string name);
   Bureaucrat(const std::string name, unsigned int grade);
-  Bureaucrat &operator=(const Bureaucrat &other);
+  Bureaucrat(const Bureaucrat& other);
   ~Bureaucrat();
   void incrementGrade();
   void decrementGrade();
   const std::string &getName() const;
   unsigned int getGrade() const;
-  void signForm(const AForm &form);
+  void signForm(AForm form);
   void executeForm(AForm const &form);
   class GradeTooHighException : public std::out_of_range {
   public:

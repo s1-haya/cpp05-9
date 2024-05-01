@@ -1,18 +1,25 @@
 #include "AForm.hpp"
+
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
 
 AForm::AForm()
-    : name_("default"), isSign_(false), signGrade_(LOWEST_GRADE),
+    : name_("default"),
+      isSign_(false),
+      signGrade_(LOWEST_GRADE),
       execGrade_(LOWEST_GRADE) {}
 
 AForm::AForm(const std::string name)
-    : name_(name), isSign_(false), signGrade_(LOWEST_GRADE),
+    : name_(name),
+      isSign_(false),
+      signGrade_(LOWEST_GRADE),
       execGrade_(LOWEST_GRADE) {}
 
 AForm::AForm(const std::string name, unsigned int signGrade,
              unsigned int execGrade)
-    : name_(name), isSign_(false), signGrade_(signGrade),
+    : name_(name),
+      isSign_(false),
+      signGrade_(signGrade),
       execGrade_(execGrade) {
   if (HIGHEST_GRADE > signGrade || HIGHEST_GRADE > execGrade) {
     throw Bureaucrat::GradeTooLowException();
@@ -20,10 +27,30 @@ AForm::AForm(const std::string name, unsigned int signGrade,
     throw Bureaucrat::GradeTooHighException();
 }
 
+AForm::AForm(const AForm &other)
+    : name_(other.name_),
+      isSign_(other.isSign_),
+      signGrade_(other.signGrade_),
+      execGrade_(other.execGrade_) {
+  if (HIGHEST_GRADE > other.signGrade_ || HIGHEST_GRADE > other.execGrade_) {
+    throw Bureaucrat::GradeTooLowException();
+  } else if (LOWEST_GRADE < other.signGrade_ || LOWEST_GRADE < other.execGrade_)
+    throw Bureaucrat::GradeTooHighException();
+}
+
+AForm &AForm::operator=(const AForm &other) {
+  if (HIGHEST_GRADE > other.signGrade_ || HIGHEST_GRADE > other.execGrade_)
+    throw(AForm::GradeTooHighException());
+  else if (LOWEST_GRADE < other.signGrade_ || LOWEST_GRADE < other.execGrade_)
+    throw(AForm::GradeTooLowException());
+  else
+    this->isSign_ = other.isSign_;
+  return (*this);
+}
+
 std::ostream &operator<<(std::ostream &os, const AForm &form) {
   std::string isSign = "false";
-  if (form.getIsSign())
-    isSign = "true";
+  if (form.getIsSign()) isSign = "true";
 
   os << "Form name: " << form.getName() << "\nForm isSign: " << isSign
      << "\nForm signGrade: " << form.getSignGrade()
@@ -53,14 +80,12 @@ void AForm::beSigned(const Bureaucrat &bureaucrat) {
 }
 
 bool AForm::isSign(bool isSign) const {
-  if (isSign)
-    return (true);
+  if (isSign) return (true);
   return (false);
 }
 
 bool AForm::isExecute(const unsigned int execGrade) const {
-  if (this->execGrade_ > execGrade)
-    return (true);
+  if (this->execGrade_ > execGrade) return (true);
   return (false);
 }
 

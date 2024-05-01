@@ -10,18 +10,24 @@ void testRobotomyRequestForm(void) {
   testTitle("test robotomy request form");
   RobotomyRequestForm robotomy;
   std::cout << robotomy << std::endl;
-  Bureaucrat cole("J cole", 4);
-  cole.executeForm(robotomy);
-    try {
+
+  std::cout << std::endl;
+
+  try {
+    Bureaucrat cole("J cole", 4);
+    cole.executeForm(robotomy);
     robotomy.beSigned(cole);
+    cole.executeForm(robotomy);
   }
   catch (const std::out_of_range& e){
     std::cerr << e.what() << std::endl;
   }
-  cole.executeForm(robotomy);
-  Bureaucrat drake("Drake", 150);
+
+  std::cout << std::endl;
+
+  Bureaucrat drake("Drake");
   drake.executeForm(robotomy);
-    try {
+  try {
     robotomy.beSigned(drake);
   }
   catch (const std::out_of_range& e){

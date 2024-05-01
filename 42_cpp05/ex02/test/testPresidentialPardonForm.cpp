@@ -7,18 +7,24 @@ void testPresidentialPardonForm(void) {
   testTitle("test presidential pardon form");
   PresidentialPardonForm presidential;
   std::cout << presidential << std::endl;
-  Bureaucrat cole("J cole", 4);
-  cole.executeForm(presidential);
+
+  std::cout << std::endl;
+
   try {
+    Bureaucrat cole("J cole", 4);
+    cole.executeForm(presidential);
     presidential.beSigned(cole);
+    cole.executeForm(presidential);
   }
   catch (const std::out_of_range& e){
     std::cerr << e.what() << std::endl;
   }
-  cole.executeForm(presidential);
-    Bureaucrat drake("Drake", 150);
+
+  std::cout << std::endl;
+
+  Bureaucrat drake("Drake");
   drake.executeForm(presidential);
-    try {
+  try {
     presidential.beSigned(drake);
   }
   catch (const std::out_of_range& e){

@@ -3,29 +3,28 @@
 void testTitle(const std::string title);
 
 void testShrubberyCreationForm(void) {
-  testTitle("test shrubbery init");
-  ShrubberyCreationForm shrubbery;
-  std::cout << shrubbery << std::endl;
-  ShrubberyCreationForm home("home");
-  std::cout << home << std::endl;
-
   testTitle("test shrubbery exec");
-	ShrubberyCreationForm Shrubbery;
-	Bureaucrat cole("J cole", 4);
-  cole.executeForm(Shrubbery);
+  ShrubberyCreationForm Shrubbery;
+  std::cerr << Shrubbery << std::endl;
+
+  std::cout << std::endl;
+
   try {
+    Bureaucrat cole("J cole", 4);
+    cole.executeForm(Shrubbery);
     Shrubbery.beSigned(cole);
-  }
-  catch (const std::out_of_range& e){
+    cole.executeForm(Shrubbery);
+  } catch (const std::out_of_range& e) {
     std::cerr << e.what() << std::endl;
   }
-  cole.executeForm(Shrubbery);
-    Bureaucrat drake("Drake", 150);
+
+  std::cout << std::endl;
+
+  Bureaucrat drake("Drake");
   drake.executeForm(Shrubbery);
-    try {
+  try {
     Shrubbery.beSigned(drake);
-  }
-  catch (const std::out_of_range& e){
+  } catch (const std::out_of_range& e) {
     std::cerr << e.what() << std::endl;
   }
   drake.executeForm(Shrubbery);

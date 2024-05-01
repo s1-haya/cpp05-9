@@ -1,21 +1,16 @@
-NAME := ./practice_repetition
+NAME := ./convert
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MP
 # CXXFLAGS += -pedantic-errors
 
 SRCS_DIR := srcs
 SRCS := main.cpp\
-		$(SRCS_DIR)/Bureaucrat.cpp\
-		$(SRCS_DIR)/AForm.cpp\
-		$(SRCS_DIR)/ShrubberyCreationForm.cpp\
-		$(SRCS_DIR)/RobotomyRequestForm.cpp\
-		$(SRCS_DIR)/PresidentialPardonForm.cpp\
-		$(SRCS_DIR)/Intern.cpp\
+		$(SRCS_DIR)/Serializer.cpp\
 
 TEST_DIR := test
 SRCS += $(TEST_DIR)/test.cpp\
 		$(TEST_DIR)/testTitle.cpp\
-		$(TEST_DIR)/testIntern.cpp\
+		$(TEST_DIR)/testSerializer.cpp\
 
 OBJS_DIR := objs
 OBJS := $(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS))

@@ -15,11 +15,15 @@ private:
   bool isSign_;
   const unsigned int signGrade_;
   const unsigned int execGrade_;
+  AForm &operator=(const AForm &other);
 
-public:
+protected:
   AForm(void);
   AForm(const std::string name);
   AForm(const std::string name, unsigned int signGrade, unsigned int execGrade);
+  AForm(const AForm& other);
+
+public:
   virtual ~AForm(void) = 0;
   const std::string getName(void) const;
   bool getIsSign(void) const;

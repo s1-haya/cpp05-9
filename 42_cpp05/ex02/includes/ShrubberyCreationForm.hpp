@@ -4,15 +4,15 @@
 #include "AForm.hpp"
 
 class ShrubberyCreationForm : public AForm {
-private:
+ private:
   std::string target_;
   void executeAction(Bureaucrat const &executor) const;
+  ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
 
-public:
+ public:
   ShrubberyCreationForm();
   ShrubberyCreationForm(const std::string target);
   ShrubberyCreationForm(const ShrubberyCreationForm &other);
-  ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
   ~ShrubberyCreationForm();
   void execute(Bureaucrat const &executor) const;
 };

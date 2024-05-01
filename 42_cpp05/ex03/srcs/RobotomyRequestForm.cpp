@@ -1,7 +1,9 @@
-#include "AForm.hpp"
 #include "RobotomyRequestForm.hpp"
+
 #include <cstdlib>
 #include <fstream>
+
+#include "AForm.hpp"
 
 #define ROBOTOMY_REQUEST_SIGN_GRADE 72
 #define ROBOTOMY_REQUEST_EXEC_GRADE 45
@@ -18,15 +20,13 @@ RobotomyRequestForm::RobotomyRequestForm(std::string target)
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
     : AForm("RobotomyRequestForm", ROBOTOMY_REQUEST_SIGN_GRADE,
-            ROBOTOMY_REQUEST_EXEC_GRADE) {
-  this->target_ = other.target_;
-}
+            ROBOTOMY_REQUEST_EXEC_GRADE),
+      target_(other.target_) {}
 
-RobotomyRequestForm &
-RobotomyRequestForm::operator=(const RobotomyRequestForm &other) {
-  if (this != &other) {
+RobotomyRequestForm &RobotomyRequestForm::operator=(
+    const RobotomyRequestForm &other) {
+  if (this != &other)
     this->target_ = other.target_;
-  }
   return (*this);
 }
 
@@ -45,7 +45,8 @@ void RobotomyRequestForm::executeAction() const {
   double probability = 50.0;
   int random = rand() % 100;
   if (random < probability)
-    std::cout << this->target_ << " has been robotomized successfully." << std::endl;
+    std::cout << this->target_ << " has been robotomized successfully."
+              << std::endl;
   else
     std::cerr << this->target_ << " has been failed." << std::endl;
 }

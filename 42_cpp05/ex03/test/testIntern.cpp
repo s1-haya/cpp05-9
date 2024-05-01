@@ -15,7 +15,7 @@ void testIntern(void) {
     std::cerr << e.what() << std::endl;
   }
   cole.executeForm(presidential);
-    Bureaucrat drake("Drake", 150);
+  Bureaucrat drake("Drake", 150);
   drake.executeForm(presidential);
     try {
     presidential.beSigned(drake);

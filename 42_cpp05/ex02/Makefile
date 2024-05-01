@@ -10,20 +10,13 @@ SRCS := main.cpp\
 		$(SRCS_DIR)/ShrubberyCreationForm.cpp\
 		$(SRCS_DIR)/RobotomyRequestForm.cpp\
 		$(SRCS_DIR)/PresidentialPardonForm.cpp\
-		# $(SRCS_DIR)/Cat.cpp\
-		# $(SRCS_DIR)/Dog.cpp\
-		# $(SRCS_DIR)/WrongAnimal.cpp\
-		# $(SRCS_DIR)/WrongCat.cpp\
 
 TEST_DIR := test
 SRCS += $(TEST_DIR)/test.cpp\
 		$(TEST_DIR)/testTitle.cpp\
-		$(TEST_DIR)/testBureaucrat.cpp\
 		$(TEST_DIR)/testShrubberyCreationForm.cpp\
 		$(TEST_DIR)/testRobotomyRequestForm.cpp\
 		$(TEST_DIR)/testPresidentialPardonForm.cpp\
-		# $(TEST_DIR)/testCorrectClass.cpp\
-		# $(TEST_DIR)/testWrongClass.cpp\
 
 OBJS_DIR := objs
 OBJS := $(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS))

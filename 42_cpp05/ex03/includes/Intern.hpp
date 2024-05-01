@@ -1,25 +1,30 @@
 #ifndef EX03_INTERN_HPP_
 #define EX03_INTERN_HPP_
 
+#include <string>
+
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
-#include <string>
 
 class Intern {
-private:
+ private:
   static const std::string names_[3];
-  static const AForm* forms_[3];
+  static AForm* (Intern::*forms_[3])(const std::string&) const;
   AForm *newShrubberyCreation(const std::string &target) const;
   AForm *newRobotomyRequest(const std::string &target) const;
   AForm *newPresidentialPardon(const std::string &target) const;
 
-public:
-  Intern() {}
-  ~Intern() {}
-  Intern(const Intern &other);
+ public:
+  Intern();
   Intern &operator=(const Intern &other);
+  Intern(const Intern &other);
+  ~Intern();
   AForm *makeForm(const std::string &form, const std::string &target) const;
+  class FormNotFoundException : public std::out_of_range {
+   public:
+    FormNotFoundException();
+  };
 };
 
 #endif
