@@ -1,5 +1,5 @@
-void testSerializer(void);
+void testBase(void);
 
 void runTest(void) { 
-	testSerializer();  
+	testBase();  
 }

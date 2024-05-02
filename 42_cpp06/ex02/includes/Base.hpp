@@ -2,6 +2,9 @@
 #define EX02_BASE_HPP_
 
 class Base {
+//  protected:
+//   Base();
+
  public:
   virtual ~Base();
 };

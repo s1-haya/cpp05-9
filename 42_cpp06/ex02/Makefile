@@ -5,12 +5,12 @@ CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MP
 
 SRCS_DIR := srcs
 SRCS := main.cpp\
-		$(SRCS_DIR)/Serializer.cpp\
+		$(SRCS_DIR)/Base.cpp\
 
 TEST_DIR := test
 SRCS += $(TEST_DIR)/test.cpp\
 		$(TEST_DIR)/testTitle.cpp\
-		$(TEST_DIR)/testSerializer.cpp\
+		$(TEST_DIR)/testBase.cpp\
 
 OBJS_DIR := objs
 OBJS := $(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS))
