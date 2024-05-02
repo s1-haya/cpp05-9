@@ -14,7 +14,7 @@ void testRobotomyRequestForm(void) {
   std::cout << std::endl;
 
   try {
-    Bureaucrat cole("J cole", 4);
+    Bureaucrat cole("J cole", 45);
     cole.executeForm(robotomy);
     robotomy.beSigned(cole);
     cole.executeForm(robotomy);

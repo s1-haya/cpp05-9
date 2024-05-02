@@ -81,7 +81,7 @@ bool AForm::isSign(bool isSign) const {
 }
 
 bool AForm::isExecute(const unsigned int execGrade) const {
-  if (this->execGrade_ > execGrade) return (true);
+  if (this->execGrade_ >= execGrade) return (true);
   return (false);
 }
 

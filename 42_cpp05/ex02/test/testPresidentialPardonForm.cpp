@@ -11,7 +11,7 @@ void testPresidentialPardonForm(void) {
   std::cout << std::endl;
 
   try {
-    Bureaucrat cole("J cole", 4);
+    Bureaucrat cole("J cole", 5);
     cole.executeForm(presidential);
     presidential.beSigned(cole);
     cole.executeForm(presidential);

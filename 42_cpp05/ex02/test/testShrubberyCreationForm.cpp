@@ -10,7 +10,7 @@ void testShrubberyCreationForm(void) {
   std::cout << std::endl;
 
   try {
-    Bureaucrat cole("J cole", 4);
+    Bureaucrat cole("J cole", 137);
     cole.executeForm(Shrubbery);
     Shrubbery.beSigned(cole);
     cole.executeForm(Shrubbery);
