@@ -148,7 +148,7 @@ void ScalarConverter::printInt_(const int nb) {
 void ScalarConverter::printFloat_(const float nb) {
   std::cout << "Float: " << nb;
   if (nb != std::numeric_limits<float>::infinity() &&
-      nb != -std::numeric_limits<float>::infinity() && (nb - floor(nb)) <= 0.0f)
+      nb != -std::numeric_limits<float>::infinity() && (nb - std::floor(nb)) <= 0.0f)
     std::cout << ".0";
   std::cout << "f" << std::endl;
 }
@@ -157,7 +157,7 @@ void ScalarConverter::printDouble_(const double nb) {
   std::cout << "Double: " << nb;
   if (nb != std::numeric_limits<double>::infinity() &&
       nb != -std::numeric_limits<double>::infinity() &&
-      (nb - floor(nb)) <= 0.0f)
+      (nb - std::floor(nb)) <= 0.0f)
     std::cout << ".0";
   std::cout << std::endl;
 }
