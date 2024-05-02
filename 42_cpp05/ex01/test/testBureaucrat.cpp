@@ -31,7 +31,11 @@ void testBureaucrat(void) {
   testTitle("TEST BUREAUCRAT COPY");
   try {
     Bureaucrat top("top player", 1);
+    Bureaucrat j("j", 4);
+    top = j;
+    std::cout << j << std::endl;
     Bureaucrat proCopy(top);
+    std::cout << proCopy << std::endl;
     proCopy.incrementGrade();
     std::cout << proCopy << std::endl;
   } catch (const std::out_of_range &e) {

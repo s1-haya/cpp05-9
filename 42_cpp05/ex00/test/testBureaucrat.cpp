@@ -31,8 +31,13 @@ void testBureaucrat(void) {
   testTitle("TEST BUREAUCRAT COPY");
   try {
     Bureaucrat top("top player", 1);
+    Bureaucrat jcole("j", 3);
+    top = jcole;
+    std::cout << top << std::endl;
     Bureaucrat proCopy = top;
     std::cout << proCopy << std::endl;
+    proCopy.incrementGrade();
+    proCopy.incrementGrade();
     proCopy.incrementGrade();
     std::cout << proCopy << std::endl;
   } catch (const std::exception &e) {

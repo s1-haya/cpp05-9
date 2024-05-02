@@ -12,14 +12,6 @@ Intern::Intern() {}
 
 Intern::~Intern() {}
 
-Intern::Intern(const Intern& other) { *this = other; }
-
-Intern& Intern::operator=(const Intern& other) {
-  if (this != &other) {
-  }
-  return *this;
-}
-
 AForm* Intern::newShrubberyCreation(const std::string& target) const {
   return new ShrubberyCreationForm(target);
 }

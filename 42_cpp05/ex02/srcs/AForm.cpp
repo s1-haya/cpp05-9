@@ -31,20 +31,15 @@ AForm::AForm(const AForm &other)
     : name_(other.name_ + "_copy"),
       isSign_(other.isSign_),
       signGrade_(other.signGrade_),
-      execGrade_(other.execGrade_) {
-  if (HIGHEST_GRADE > other.signGrade_ || HIGHEST_GRADE > other.execGrade_) {
-    throw Bureaucrat::GradeTooLowException();
-  } else if (LOWEST_GRADE < other.signGrade_ || LOWEST_GRADE < other.execGrade_)
-    throw Bureaucrat::GradeTooHighException();
-}
+      execGrade_(other.execGrade_) {}
 
 AForm &AForm::operator=(const AForm &other) {
-  if (HIGHEST_GRADE > other.signGrade_ || HIGHEST_GRADE > other.execGrade_)
-    throw(AForm::GradeTooHighException());
-  else if (LOWEST_GRADE < other.signGrade_ || LOWEST_GRADE < other.execGrade_)
-    throw(AForm::GradeTooLowException());
-  else
+  if (this != &other) {
+    const_cast<std::string &>(this->name_) = other.name_;
+    const_cast<unsigned int &>(this->signGrade_) = other.signGrade_;
+    const_cast<unsigned int &>(this->execGrade_) = other.execGrade_;
     this->isSign_ = other.isSign_;
+  }
   return (*this);
 }
 
@@ -62,6 +57,7 @@ AForm::~AForm() {}
 
 const std::string AForm::getName() const { return (this->name_); }
 bool AForm::getIsSign() const { return (this->isSign_); }
+void AForm::setIsSign(bool isSign) { this->isSign_ = isSign; }
 unsigned int AForm::getSignGrade() const { return (this->signGrade_); }
 unsigned int AForm::getExecGrade() const { return (this->execGrade_); }
 

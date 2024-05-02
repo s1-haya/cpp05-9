@@ -10,27 +10,27 @@
 class Form;
 
 class Bureaucrat {
-private:
+ private:
   const std::string name_;
   unsigned int grade_;
-  Bureaucrat &operator=(const Bureaucrat &other);
 
-public:
+ public:
   Bureaucrat();
   Bureaucrat(const std::string name, unsigned int grade);
-  Bureaucrat(const Bureaucrat& other);
+  Bureaucrat(const Bureaucrat &other);
+  Bureaucrat &operator=(const Bureaucrat &other);
   ~Bureaucrat();
   void incrementGrade();
   void decrementGrade();
   const std::string getName() const;
   unsigned int getGrade() const;
-  void signForm(Form form);
+  void signForm(Form const &form) const;
   class GradeTooHighException : public std::out_of_range {
-  public:
+   public:
     GradeTooHighException();
   };
   class GradeTooLowException : public std::out_of_range {
-  public:
+   public:
     GradeTooLowException();
   };
 };

@@ -13,12 +13,12 @@ private:
   bool isSign_;
   const unsigned int signGrade_;
   const unsigned int execGrade_;
-  Form &operator=(const Form &other);
 
 public:
   Form(void);
   Form(const std::string name, unsigned int signGrade, unsigned int execGrade);
   Form(const Form& other);
+  Form &operator=(const Form &other);
   ~Form(void);
   const std::string getName(void) const;
   bool getIsSign(void) const;

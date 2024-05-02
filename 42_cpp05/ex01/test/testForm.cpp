@@ -40,6 +40,21 @@ void testForm(void) {
     std::cerr << e.what() << std::endl;
   }
 
+  testTitle("Form: copy");
+  try {
+    Form form;
+    std::cout << form << std::endl;
+    std::cout << std::endl;
+    Form highForm("high", 1, 1);
+    form = highForm;
+    std::cout << form << std::endl;
+    std::cout << std::endl;
+    Form copyForm = form;
+    std::cout << copyForm << std::endl;
+  } catch (const std::out_of_range& e) {
+    std::cerr << e.what() << std::endl;
+  }
+
   testTitle("Form: Unsigned MAX");
   try {
     Form max("form", -1, -1);

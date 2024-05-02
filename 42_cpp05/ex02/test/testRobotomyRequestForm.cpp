@@ -34,4 +34,13 @@ void testRobotomyRequestForm(void) {
     std::cerr << e.what() << std::endl;
   }
   drake.executeForm(robotomy);
+
+  testTitle("Robotomy Request Form: Copy");
+  RobotomyRequestForm form;
+  std::cout << "default target: "<< form.getTarget() << std::endl;
+  RobotomyRequestForm highTarget("high");
+  form = highTarget;
+  std::cout << "assignment copy target: "<< form.getTarget() << std::endl;
+  RobotomyRequestForm copyForm = form;
+  std::cout << "copy constructor target: "<< copyForm.getTarget() << std::endl;
 }

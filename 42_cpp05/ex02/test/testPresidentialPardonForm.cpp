@@ -31,4 +31,13 @@ void testPresidentialPardonForm(void) {
     std::cerr << e.what() << std::endl;
   }
   drake.executeForm(presidential);
+
+  testTitle("Presidential Pardon Form: Copy");
+    PresidentialPardonForm form;
+    std::cout << "default target: "<< form.getTarget() << std::endl;
+    PresidentialPardonForm highTarget("high");
+    form = highTarget;
+    std::cout << "assignment copy target: "<< form.getTarget() << std::endl;
+    PresidentialPardonForm copyForm = form;
+    std::cout << "copy constructor target: "<< copyForm.getTarget() << std::endl;
 }

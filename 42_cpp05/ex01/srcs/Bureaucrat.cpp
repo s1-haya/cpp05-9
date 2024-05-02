@@ -11,20 +11,13 @@ Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : name_(name), grad
     throw Bureaucrat::GradeTooHighException();
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &other) : name_(other.name_ + "_copy"), grade_(other.grade_) {
-  if (HIGHEST_GRADE > other.grade_)
-    throw Bureaucrat::GradeTooHighException();
-  else if (LOWEST_GRADE < other.grade_)
-    throw Bureaucrat::GradeTooLowException();
-}
+Bureaucrat::Bureaucrat(const Bureaucrat &other) : name_(other.name_ + "_copy"), grade_(other.grade_) {}
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
-  if (HIGHEST_GRADE > other.grade_)
-    throw Bureaucrat::GradeTooLowException();
-  else if (LOWEST_GRADE < other.grade_)
-    throw Bureaucrat::GradeTooHighException();
-  else
+  if (this != &other) {
+    const_cast<std::string&>(this->name_) = other.name_;
     this->grade_ = other.grade_;
+  }
   return (*this);
 }
 
@@ -48,14 +41,14 @@ const std::string Bureaucrat::getName() const { return (this->name_); }
 
 unsigned int Bureaucrat::getGrade() const { return (this->grade_); }
 
-void Bureaucrat::signForm(Form form) {
-  try {
-    form.beSigned(*this);
+void Bureaucrat::signForm(Form const &form) const {
+  if (form.getIsSign())
     std::cout << this->name_ << " signed " << form.getName() << std::endl;
-  } catch (std::exception &e) {
-    std::cerr << this->name_ << " couldn't sign " << form.getName()
-              << " because " << e.what() << std::endl;
-  }
+  else
+    std::cout << this->name_ << " couldn’t sign " << form.getName()
+              << " because " << this->name_ << "'s grade(" << this->grade_
+              << ") is not higher than " << form.getName() << "'s singGrade("
+              << form.getSignGrade() << ")" << std::endl;
 }
 
 Bureaucrat::GradeTooHighException::GradeTooHighException()

@@ -18,20 +18,13 @@ Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : name_(name) {
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other)
-    : name_(other.name_ + "_copy"), grade_(other.grade_) {
-  if (HIGHEST_GRADE > other.grade_)
-    throw Bureaucrat::GradeTooHighException();
-  else if (LOWEST_GRADE < other.grade_)
-    throw Bureaucrat::GradeTooLowException();
-}
+    : name_(other.name_ + "_copy"), grade_(other.grade_) {}
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
-  if (HIGHEST_GRADE > other.grade_)
-    throw Bureaucrat::GradeTooHighException();
-  else if (LOWEST_GRADE < other.grade_)
-    throw Bureaucrat::GradeTooLowException();
-  else
+  if (this != &other) {
+    const_cast<std::string &>(this->name_) = other.name_;
     this->grade_ = other.grade_;
+  }
   return (*this);
 }
 

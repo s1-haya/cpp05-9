@@ -22,22 +22,17 @@ Form::Form(const std::string name, unsigned int signGrade,
 
 Form::Form(const Form &other)
     : name_(other.name_ + "_copy"),
-      isSign_(false),
+      isSign_(other.isSign_),
       signGrade_(other.signGrade_),
-      execGrade_(other.execGrade_) {
-  if (HIGHEST_GRADE > other.signGrade_ || HIGHEST_GRADE > other.execGrade_)
-    throw(Form::GradeTooHighException());
-  else if (LOWEST_GRADE < other.signGrade_ || LOWEST_GRADE < other.execGrade_)
-    throw(Form::GradeTooLowException());
-}
+      execGrade_(other.execGrade_) {}
 
 Form &Form::operator=(const Form &other) {
-  if (HIGHEST_GRADE > other.signGrade_ || HIGHEST_GRADE > other.execGrade_)
-    throw(Form::GradeTooHighException());
-  else if (LOWEST_GRADE < other.signGrade_ || LOWEST_GRADE < other.execGrade_)
-    throw(Form::GradeTooLowException());
-  else
+  if (this != &other) {
+    const_cast<std::string &>(this->name_) = other.name_;
+    const_cast<unsigned int &>(this->signGrade_) = other.signGrade_;
+    const_cast<unsigned int &>(this->execGrade_) = other.execGrade_;
     this->isSign_ = other.isSign_;
+  }
   return (*this);
 }
 

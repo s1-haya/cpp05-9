@@ -28,4 +28,13 @@ void testShrubberyCreationForm(void) {
     std::cerr << e.what() << std::endl;
   }
   drake.executeForm(Shrubbery);
+
+  testTitle("Shrubbery Creation Form: Copy");
+  ShrubberyCreationForm form;
+  std::cout << "default target: "<< form.getTarget() << std::endl;
+  ShrubberyCreationForm highTarget("high");
+  form = highTarget;
+  std::cout << "assignment copy target: "<< form.getTarget() << std::endl;
+  ShrubberyCreationForm copyForm = form;
+  std::cout << "copy constructor target: "<< copyForm.getTarget() << std::endl;
 }

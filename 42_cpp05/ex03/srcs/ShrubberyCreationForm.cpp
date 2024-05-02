@@ -12,7 +12,7 @@ ShrubberyCreationForm::ShrubberyCreationForm()
             SHRUBBERY_CREATION_EXEC_GRADE),
       target_("target") {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string target)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
     : AForm("ShrubberyCreationForm", SHRUBBERY_CREATION_SIGN_GRADE,
             SHRUBBERY_CREATION_EXEC_GRADE),
       target_(target) {}
@@ -24,7 +24,10 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(
     const ShrubberyCreationForm &other) {
-  if (this != &other) this->target_ = other.target_;
+  if (this != &other) {
+    this->setIsSign(other.getIsSign());
+    this->target_ = other.target_;
+  }
   return (*this);
 }
 
@@ -45,8 +48,8 @@ void ShrubberyCreationForm::executeAction(Bureaucrat const &executor) const {
   if (outputFile.fail()) {
     std::cerr << "Error: faild to create " << fileName << std::endl;
     return;
-  std::cout << fileName << " file created by " << executor.getName()
-            << std::endl;
+    std::cout << fileName << " file created by " << executor.getName()
+              << std::endl;
   }
 
   outputFile
@@ -67,4 +70,8 @@ void ShrubberyCreationForm::executeAction(Bureaucrat const &executor) const {
          "       .         .   .   000     .        .       .\n"
          ".. .. ..................O000O........................ ...... ...\n";
   outputFile.close();
+}
+
+const std::string& ShrubberyCreationForm::getTarget() const {
+  return (this->target_);
 }

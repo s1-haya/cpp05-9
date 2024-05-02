@@ -13,7 +13,7 @@ RobotomyRequestForm::RobotomyRequestForm()
             ROBOTOMY_REQUEST_EXEC_GRADE),
       target_("target") {}
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target)
+RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
     : AForm("RobotomyRequestForm", ROBOTOMY_REQUEST_SIGN_GRADE,
             ROBOTOMY_REQUEST_EXEC_GRADE),
       target_(target) {}
@@ -25,7 +25,10 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(
     const RobotomyRequestForm &other) {
-  if (this != &other) this->target_ = other.target_;
+  if (this != &other) {
+    this->setIsSign(other.getIsSign());
+    this->target_ = other.target_;
+  }
   return (*this);
 }
 
@@ -48,4 +51,8 @@ void RobotomyRequestForm::executeAction() const {
               << std::endl;
   else
     std::cerr << this->target_ << " has been failed." << std::endl;
+}
+
+const std::string& RobotomyRequestForm::getTarget() const {
+  return (this->target_);
 }
