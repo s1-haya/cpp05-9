@@ -10,7 +10,7 @@
 class Intern {
  private:
   static const std::string names_[3];
-  static AForm* (Intern::*forms_[3])(const std::string&) const;
+  static AForm *(Intern::*forms_[3])(const std::string &) const;
   AForm *newShrubberyCreation(const std::string &target) const;
   AForm *newRobotomyRequest(const std::string &target) const;
   AForm *newPresidentialPardon(const std::string &target) const;
@@ -20,11 +20,7 @@ class Intern {
   Intern &operator=(const Intern &other);
   Intern(const Intern &other);
   ~Intern();
-  AForm *makeForm(const std::string &form, const std::string &target) const;
-  class FormNotFoundException : public std::out_of_range {
-   public:
-    FormNotFoundException();
-  };
+  AForm *makeForm(const std::string &name, const std::string &target) const;
 };
 
 #endif

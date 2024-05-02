@@ -6,8 +6,8 @@
 void testTitle(const std::string title);
 
 void testRobotomyRequestForm(void) {
-  std::srand((unsigned)time(NULL));
   testTitle("test robotomy request form");
+  std::srand((unsigned)time(NULL));
   RobotomyRequestForm robotomy;
   std::cout << robotomy << std::endl;
 
