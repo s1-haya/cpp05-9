@@ -39,7 +39,7 @@ fclean: clean
 re: fclean all
 
 test: re
-	./$(NAME) | grep -v called
+	./$(NAME)
 
 leak: re
 	valgrind --leak-check=full $(NAME)

@@ -24,8 +24,8 @@ public:
   void decrementGrade();
   const std::string &getName() const;
   unsigned int getGrade() const;
-  void signForm(AForm form);
-  void executeForm(AForm const &form);
+  void signForm(AForm const &form) const;
+  void executeForm(AForm const &form) const;
   class GradeTooHighException : public std::out_of_range {
   public:
     GradeTooHighException();

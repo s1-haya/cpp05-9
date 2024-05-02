@@ -55,17 +55,17 @@ const std::string &Bureaucrat::getName() const { return (this->name_); }
 
 unsigned int Bureaucrat::getGrade() const { return (this->grade_); }
 
-void Bureaucrat::signForm(AForm form) {
-  try {
-    form.beSigned(*this);
+void Bureaucrat::signForm(AForm const &form) const {
+  if (form.getIsSign())
     std::cout << this->name_ << " signed " << form.getName() << std::endl;
-  } catch (std::exception &e) {
-    std::cerr << this->name_ << " couldn't sign " << form.getName()
-              << " because " << e.what() << std::endl;
-  }
+  else
+    std::cout << this->name_ << " couldn’t sign " << form.getName()
+              << " because " << this->name_ << "'s grade(" << this->grade_
+              << ") is not higher than " << form.getName() << "'s singGrade("
+              << form.getSignGrade() << ")" << std::endl;
 }
 
-void Bureaucrat::executeForm(AForm const &form) {
+void Bureaucrat::executeForm(AForm const &form) const{
   try {
     form.execute(*this);
     std::cout << this->name_ << " executed " << form.getName() << std::endl;

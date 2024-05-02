@@ -29,7 +29,7 @@ public:
   bool getIsSign(void) const;
   unsigned int getSignGrade(void) const;
   unsigned int getExecGrade(void) const;
-  void beSigned(const Bureaucrat &bureaucrat);
+  void beSigned(Bureaucrat const &bureaucrat);
   virtual void execute(Bureaucrat const &executor) const = 0;
   bool isSign(bool isSign) const;
   bool isExecute(const unsigned int execGrade) const;
