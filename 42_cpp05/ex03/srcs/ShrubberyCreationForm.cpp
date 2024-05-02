@@ -41,7 +41,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
 
 void ShrubberyCreationForm::executeAction(Bureaucrat const &executor) const {
   std::string fileName = this->target_ + "_shrubbery";
-  std::ofstream outputFile(fileName);
+  std::ofstream outputFile(fileName.c_str());
   if (outputFile.fail()) {
     std::cerr << "Error: faild to create " << fileName << std::endl;
     return;
