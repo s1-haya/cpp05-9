@@ -43,6 +43,10 @@ class AForm {
    public:
     GradeTooLowException();
   };
+  class FormIsAlreadySigned : public std::out_of_range {
+   public:
+    FormIsAlreadySigned(const std::string &message);
+  };
   class UnsignedException : public std::out_of_range {
    public:
     UnsignedException();

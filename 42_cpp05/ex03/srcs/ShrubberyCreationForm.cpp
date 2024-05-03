@@ -4,21 +4,22 @@
 
 #include "AForm.hpp"
 
+#define SHRUBBERY_CREATION "ShrubberyCreationForm"
 #define SHRUBBERY_CREATION_SIGN_GRADE 145
 #define SHRUBBERY_CREATION_EXEC_GRADE 137
 
 ShrubberyCreationForm::ShrubberyCreationForm()
-    : AForm("ShrubberyCreationForm", SHRUBBERY_CREATION_SIGN_GRADE,
+    : AForm(SHRUBBERY_CREATION, SHRUBBERY_CREATION_SIGN_GRADE,
             SHRUBBERY_CREATION_EXEC_GRADE),
       target_("target") {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
-    : AForm("ShrubberyCreationForm", SHRUBBERY_CREATION_SIGN_GRADE,
+    : AForm(SHRUBBERY_CREATION, SHRUBBERY_CREATION_SIGN_GRADE,
             SHRUBBERY_CREATION_EXEC_GRADE),
       target_(target) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
-    : AForm("ShrubberyCreationForm", SHRUBBERY_CREATION_SIGN_GRADE,
+    : AForm(SHRUBBERY_CREATION, SHRUBBERY_CREATION_SIGN_GRADE,
             SHRUBBERY_CREATION_EXEC_GRADE),
       target_(other.target_ + "_copy") {}
 

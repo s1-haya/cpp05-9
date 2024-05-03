@@ -5,21 +5,22 @@
 
 #include "AForm.hpp"
 
+#define ROBOTOMY_REQUEST "RobotomyRequestForm"
 #define ROBOTOMY_REQUEST_SIGN_GRADE 72
 #define ROBOTOMY_REQUEST_EXEC_GRADE 45
 
 RobotomyRequestForm::RobotomyRequestForm()
-    : AForm("RobotomyRequestForm", ROBOTOMY_REQUEST_SIGN_GRADE,
+    : AForm(ROBOTOMY_REQUEST, ROBOTOMY_REQUEST_SIGN_GRADE,
             ROBOTOMY_REQUEST_EXEC_GRADE),
       target_("target") {}
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
-    : AForm("RobotomyRequestForm", ROBOTOMY_REQUEST_SIGN_GRADE,
+    : AForm(ROBOTOMY_REQUEST, ROBOTOMY_REQUEST_SIGN_GRADE,
             ROBOTOMY_REQUEST_EXEC_GRADE),
       target_(target) {}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
-    : AForm("RobotomyRequestForm", ROBOTOMY_REQUEST_SIGN_GRADE,
+    : AForm(ROBOTOMY_REQUEST, ROBOTOMY_REQUEST_SIGN_GRADE,
             ROBOTOMY_REQUEST_EXEC_GRADE),
       target_(other.target_ + "_copy") {}
 

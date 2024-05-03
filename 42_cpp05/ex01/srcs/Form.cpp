@@ -46,22 +46,21 @@ unsigned int Form::getExecGrade() const { return (this->execGrade_); }
 void Form::beSigned(const Bureaucrat &bureaucrat) {
   if (bureaucrat.getGrade() <= this->signGrade_) {
     if (this->isSign_)
-      std::cout << this->name_ << " is already signed."
-                << std::endl;
-    else {
-      std::cout << this->name_ << " is signed by " << bureaucrat.getName()
-                << std::endl;
+      throw(Form::FormIsAlreadySigned(this->name_ + " is already signed." ));
+    else
       this->isSign_ = true;
-    }
   } else
     throw(Form::GradeTooLowException());
 }
 
 Form::GradeTooHighException::GradeTooHighException()
-    : std::out_of_range("Exception: Form's grade is too high."){};
+    : std::out_of_range("Form's grade is too high."){};
 
 Form::GradeTooLowException::GradeTooLowException()
-    : std::out_of_range("Exception: Form's grade is too low."){};
+    : std::out_of_range("Form's grade is too low."){};
+
+Form::FormIsAlreadySigned::FormIsAlreadySigned(const std::string& message)
+    : std::out_of_range(message){};
 
 std::ostream &operator<<(std::ostream &os, const Form &form) {
   std::string isSign = "false";

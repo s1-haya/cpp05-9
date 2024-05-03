@@ -15,15 +15,15 @@ private:
   const unsigned int execGrade_;
 
 public:
-  Form(void);
+  Form();
   Form(const std::string name, unsigned int signGrade, unsigned int execGrade);
   Form(const Form& other);
   Form &operator=(const Form &other);
-  ~Form(void);
-  const std::string getName(void) const;
-  bool getIsSign(void) const;
-  unsigned int getSignGrade(void) const;
-  unsigned int getExecGrade(void) const;
+  ~Form();
+  const std::string getName() const;
+  bool getIsSign() const;
+  unsigned int getSignGrade() const;
+  unsigned int getExecGrade() const;
   void beSigned(const Bureaucrat &bureaucrat);
   class GradeTooHighException : public std::out_of_range {
   public:
@@ -32,6 +32,10 @@ public:
   class GradeTooLowException : public std::out_of_range {
   public:
     GradeTooLowException();
+  };
+  class FormIsAlreadySigned : public std::out_of_range {
+    public:
+      FormIsAlreadySigned(const std::string& message);
   };
 };
 

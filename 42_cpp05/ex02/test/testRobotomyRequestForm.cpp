@@ -43,4 +43,17 @@ void testRobotomyRequestForm(void) {
   std::cout << "assignment copy target: "<< form.getTarget() << std::endl;
   RobotomyRequestForm copyForm = form;
   std::cout << "copy constructor target: "<< copyForm.getTarget() << std::endl;
+
+  testTitle("Robotomy Request Form: couldn't be signed because the form is already signed");
+  try {
+    RobotomyRequestForm form;
+    Bureaucrat cole("J Cole", 2);
+    std::cout << form << std::endl;
+    form.beSigned(cole);
+    std::cout << form << std::endl;
+    cole.signForm(form);
+    form.beSigned(cole);
+  } catch (const std::out_of_range& e) {
+    std::cerr << e.what() << std::endl;
+  }
 }

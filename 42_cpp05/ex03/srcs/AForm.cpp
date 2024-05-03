@@ -64,12 +64,9 @@ unsigned int AForm::getExecGrade() const { return (this->execGrade_); }
 void AForm::beSigned(const Bureaucrat &bureaucrat) {
   if (bureaucrat.getGrade() <= this->signGrade_) {
     if (this->isSign_)
-      std::cout << this->name_ << " is already signed." << std::endl;
-    else {
-      std::cout << this->name_ << " is signed by " << bureaucrat.getName()
-                << std::endl;
+      throw (AForm::FormIsAlreadySigned(this->name_ + " is already signed."));
+    else
       this->isSign_ = true;
-    }
   } else {
     throw(AForm::GradeTooLowException());
   }
@@ -86,10 +83,13 @@ bool AForm::isExecute(const unsigned int execGrade) const {
 }
 
 AForm::GradeTooHighException::GradeTooHighException()
-    : std::out_of_range("Exception: Form's grade is too high."){};
+    : std::out_of_range("Form's grade is too high."){};
 
 AForm::GradeTooLowException::GradeTooLowException()
-    : std::out_of_range("Exception: Form's grade is too low."){};
+    : std::out_of_range("Form's grade is too low."){};
+
+AForm::FormIsAlreadySigned::FormIsAlreadySigned(const std::string& message)
+    : std::out_of_range(message){};
 
 AForm::UnsignedException::UnsignedException()
-    : std::out_of_range("Exception: Form is unsigned ... "){};
+    : std::out_of_range("Form is unsigned ... "){};

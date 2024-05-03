@@ -48,14 +48,15 @@ const std::string &Bureaucrat::getName() const { return (this->name_); }
 
 unsigned int Bureaucrat::getGrade() const { return (this->grade_); }
 
-void Bureaucrat::signForm(AForm const &form) const {
-  if (form.getIsSign())
+void Bureaucrat::signForm(AForm &form) {
+  try {
+    form.beSigned(*this);
     std::cout << this->name_ << " signed " << form.getName() << std::endl;
-  else
+  }
+  catch (const std::out_of_range& e) {
     std::cout << this->name_ << " couldn’t sign " << form.getName()
-              << " because " << this->name_ << "'s grade(" << this->grade_
-              << ") is not higher than " << form.getName() << "'s singGrade("
-              << form.getSignGrade() << ")" << std::endl;
+              << " because " << e.what() << std::endl;
+  }
 }
 
 void Bureaucrat::executeForm(AForm const &form) const {
@@ -69,9 +70,10 @@ void Bureaucrat::executeForm(AForm const &form) const {
 }
 
 Bureaucrat::GradeTooHighException::GradeTooHighException()
-    : std::out_of_range("Bureaucrat: Grade is too high."){};
+    : std::out_of_range("Bureaucrat grade is too high."){};
+
 Bureaucrat::GradeTooLowException::GradeTooLowException()
-    : std::out_of_range("Bureaucrat: Grade is too low."){};
+    : std::out_of_range("Bureaucrat grade is too low."){};
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &data) {
   os << data.getName() << ", bureaucrat grade " << data.getGrade();

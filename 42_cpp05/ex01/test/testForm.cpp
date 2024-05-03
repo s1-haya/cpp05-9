@@ -8,15 +8,14 @@ void testForm(void) {
     Form form;
     std::cout << form << std::endl;
     Bureaucrat cole("J Cole", 2);
-    form.beSigned(cole);
+    cole.signForm(form);
     std::cout << cole << std::endl;
     std::cout << form << std::endl;
-    cole.signForm(form);
   } catch (const std::out_of_range& e) {
     std::cerr << e.what() << std::endl;
   }
 
-  testTitle("Form: not be signed");
+  testTitle("Form: couldn't be signed because the grade is too low");
   try {
     Bureaucrat jay("Jay-z", 150);
     Form low("form", 149, 149);
@@ -29,13 +28,15 @@ void testForm(void) {
     std::cerr << e.what() << std::endl;
   }
 
-  testTitle("Form: default");
+  testTitle("Form: couldn't be signed because the form is already signed");
   try {
     Form form;
+    Bureaucrat cole("J Cole", 2);
     std::cout << form << std::endl;
-    std::cout << std::endl;
-    Form copyForm = form;
-    std::cout << copyForm << std::endl;
+    form.beSigned(cole);
+    std::cout << form << std::endl;
+    cole.signForm(form);
+    form.beSigned(cole);
   } catch (const std::out_of_range& e) {
     std::cerr << e.what() << std::endl;
   }

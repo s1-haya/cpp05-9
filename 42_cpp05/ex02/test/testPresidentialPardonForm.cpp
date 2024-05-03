@@ -40,4 +40,17 @@ void testPresidentialPardonForm(void) {
     std::cout << "assignment copy target: "<< form.getTarget() << std::endl;
     PresidentialPardonForm copyForm = form;
     std::cout << "copy constructor target: "<< copyForm.getTarget() << std::endl;
+  
+  testTitle("Presidential Pardon Form: couldn't be signed because the form is already signed");
+  try {
+    PresidentialPardonForm form;
+    Bureaucrat cole("J Cole", 2);
+    std::cout << form << std::endl;
+    form.beSigned(cole);
+    std::cout << form << std::endl;
+    cole.signForm(form);
+    form.beSigned(cole);
+  } catch (const std::out_of_range& e) {
+    std::cerr << e.what() << std::endl;
+  }
 }

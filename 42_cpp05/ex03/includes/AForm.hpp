@@ -18,19 +18,19 @@ class AForm {
   const unsigned int execGrade_;
 
  protected:
-  AForm(void);
+  AForm();
   AForm(const std::string name);
   AForm(const std::string name, unsigned int signGrade, unsigned int execGrade);
   AForm &operator=(const AForm &other);
   AForm(const AForm &other);
 
  public:
-  virtual ~AForm(void) = 0;
-  const std::string getName(void) const;
-  bool getIsSign(void) const;
+  virtual ~AForm() = 0;
+  const std::string getName() const;
+  bool getIsSign() const;
   void setIsSign(bool isSign);
-  unsigned int getSignGrade(void) const;
-  unsigned int getExecGrade(void) const;
+  unsigned int getSignGrade() const;
+  unsigned int getExecGrade() const;
   void beSigned(Bureaucrat const &bureaucrat);
   virtual void execute(Bureaucrat const &executor) const = 0;
   bool isSign(bool isSign) const;
@@ -42,6 +42,10 @@ class AForm {
   class GradeTooLowException : public std::out_of_range {
    public:
     GradeTooLowException();
+  };
+  class FormIsAlreadySigned : public std::out_of_range {
+   public:
+    FormIsAlreadySigned(const std::string &message);
   };
   class UnsignedException : public std::out_of_range {
    public:

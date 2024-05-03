@@ -2,22 +2,23 @@
 
 #include "AForm.hpp"
 
+#define PRESIDENTIAL_PARDON "PresidentialPardonForm"
 #define PRESIDENTIAL_PARDON_SIGN_GRADE 25
 #define PRESIDENTIAL_PARDON_EXEC_GRADE 5
 
 PresidentialPardonForm::PresidentialPardonForm()
-    : AForm("PresidentialPardonForm", PRESIDENTIAL_PARDON_SIGN_GRADE,
+    : AForm(PRESIDENTIAL_PARDON, PRESIDENTIAL_PARDON_SIGN_GRADE,
             PRESIDENTIAL_PARDON_EXEC_GRADE),
       target_("target") {}
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string& target)
-    : AForm("PresidentialPardonForm", PRESIDENTIAL_PARDON_SIGN_GRADE,
+PresidentialPardonForm::PresidentialPardonForm(const std::string &target)
+    : AForm(PRESIDENTIAL_PARDON, PRESIDENTIAL_PARDON_SIGN_GRADE,
             PRESIDENTIAL_PARDON_EXEC_GRADE),
       target_(target) {}
 
 PresidentialPardonForm::PresidentialPardonForm(
     const PresidentialPardonForm &other)
-    : AForm("PresidentialPardonForm", PRESIDENTIAL_PARDON_SIGN_GRADE,
+    : AForm(PRESIDENTIAL_PARDON, PRESIDENTIAL_PARDON_SIGN_GRADE,
             PRESIDENTIAL_PARDON_EXEC_GRADE),
       target_(other.target_ + "_copy") {}
 
@@ -46,6 +47,6 @@ void PresidentialPardonForm::executeAction() const {
             << std::endl;
 }
 
-const std::string& PresidentialPardonForm::getTarget() const {
+const std::string &PresidentialPardonForm::getTarget() const {
   return (this->target_);
 }

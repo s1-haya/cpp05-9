@@ -69,21 +69,19 @@ bool isFloat(std::string literal) {
 }
 
 int getType(std::string literal) {
-  int type = INVALID;
   if (isChar(literal))
-    type = CHAR;
+    return (CHAR);
   else if (isDouble(literal))
-    type = DOUBLE;
+    return (DOUBLE);
   else if (isFloat(literal))
-    type = FLOAT;
+    return (FLOAT);
   else if (isInt(literal))
-    type = INT;
-  return (type);
+    return (INT);
+  return (INVALID);
 }
 
 void ScalarConverter::convert(std::string literal) {
-  int type = getType(literal);
-  switch (type) {
+  switch (getType(literal)) {
     case INVALID:
       std::cerr << "Invalid input!" << std::endl;
       break;

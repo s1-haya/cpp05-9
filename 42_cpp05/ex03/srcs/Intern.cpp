@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-const std::string Intern::names_[3] = {"ShrubberyCreationForm", "RobotomyRequestForm",
-                                       "PresidentialPardonForm"};
+const std::string Intern::names_[3] = {
+    "ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm"};
 AForm* (Intern::*Intern::forms_[3])(const std::string&) const = {
     &Intern::newShrubberyCreation, &Intern::newRobotomyRequest,
     &Intern::newPresidentialPardon};
@@ -13,15 +13,15 @@ Intern::Intern() {}
 Intern::~Intern() {}
 
 AForm* Intern::newShrubberyCreation(const std::string& target) const {
-  return new ShrubberyCreationForm(target);
+  return (new ShrubberyCreationForm(target));
 }
 
 AForm* Intern::newRobotomyRequest(const std::string& target) const {
-  return new RobotomyRequestForm(target);
+  return (new RobotomyRequestForm(target));
 }
 
 AForm* Intern::newPresidentialPardon(const std::string& target) const {
-  return new PresidentialPardonForm(target);
+  return (new PresidentialPardonForm(target));
 }
 
 AForm* Intern::makeForm(const std::string& name,
