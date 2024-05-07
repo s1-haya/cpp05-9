@@ -4,6 +4,30 @@
 
 enum Type { A, B };
 
+struct Data {
+  int num;
+  std::string name;
+
+  Data(int n, const std::string& s) : num(n), name(s) {}
+
+  Data(const Data& other) : num(other.num), name(other.name) {}
+
+  Data& operator=(const Data& other) {
+    num = other.num;
+    name = other.name;
+    return *this;
+  }
+  bool operator<(const Data& other) const {
+    if (num != other.num) {
+      return num < other.num;
+    } else {
+      return name < other.name;
+    }
+  }
+
+  bool operator>(const Data& other) const { return other < *this; }
+};
+
 int main(void) {
   std::cout << "--- <int> ---" << std::endl;
   int intA = 2;
@@ -53,5 +77,23 @@ int main(void) {
             << std::endl;
   std::cout << "max( pointerA, pointerB ) = " << ::max(pointerA, pointerB)
             << std::endl;
-  return 0;
+  std::cout << "--- <Data> ---" << std::endl;
+  Data dataA(1985, "Jcole");
+  Data dataB(1986, "drake");
+  std::cout << "dataA = " << dataA.name << "," << dataA.num << std::endl;
+  std::cout << "dataB = " << dataB.name << "," << dataB.num << std::endl;
+  std::cout << "dataA = " << dataA.name << "," << dataA.num << std::endl;
+  std::cout << "dataB = " << dataB.name << "," << dataB.num << std::endl;
+  swap(dataA, dataB);
+  std::cout << "dataA = " << dataA.name << "," << dataA.num
+            << " dataB = " << dataB.name << std::cout
+            << "dataA = " << dataA.name << ", dataB = " << dataB.name
+            << std::endl;
+  std::cout << "dataA = " << dataA.num << ", dataB = " << dataB.num
+            << std::endl;
+  std::cout << "min( dataA, dataB ) = " << ::min(dataA, dataB).name
+            << std::endl;
+  std::cout << "max( dataA, dataB ) = " << ::max(dataA, dataB).name
+            << std::endl;
+  return (0);
 }
