@@ -4,8 +4,14 @@
 #define MAX_VAL 750
 int main(int, char**)
 {
+    Array<char *> b;
+    // if (b.array_[0] == NULL)
+    //     std::cout << "OK" << std::endl;
     Array<int> a = (MAX_VAL);
-    std::cout << a.getN() << std::endl;
+    std::cout << a.getSize() << std::endl;
+
+    // std::cout << a << std::endl;
+    std::cout << b << std::endl;
     // Array<int> numbers(MAX_VAL);
     // int* mirror = new int[MAX_VAL];
     // srand(time(NULL));
