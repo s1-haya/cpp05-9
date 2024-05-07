@@ -5,18 +5,7 @@
 void testTitle(const std::string title);
 
 void testSerializer(void) {
-	testTitle("test serializer");
-	Data data = {12, "sawa"};
-	uintptr_t ptr;
-	Data* tmp;
-	ptr = Serializer::serialize(&data);
-	tmp = Serializer::deserialize(ptr);
-	std::cout << "ptr: " << ptr;
-	std::cout << std::endl;
-	std::cout << "tmp: " << tmp;
-	std::cout << std::endl;
-	std::cout << "data: " << &data;
-	std::cout << std::endl;
+	testTitle("test serializer & deserializer");
 	// not implicit because this comile error
 	// error: incompatible pointer to integer conversion assigning to 'uintptr_t' (aka 'unsigned long') from 't_data *' (aka 's_data *')
 	// ptr = data;
@@ -24,24 +13,38 @@ void testSerializer(void) {
 	// not only static_cast<uintptr_t> because t_data* isn't uintptr_t.
 	// error: static_cast from 't_data *' (aka 's_data *') to 'uintptr_t' (aka 'unsigned long') is not allowed
 	// ptr = static_cast<uintptr_t>(data);
-	Data sawa = {12, "sawa"};
-    std::cout << "Address of sawa: " << &sawa << std::endl;
-    std::cout << "Name: " << sawa.name << std::endl;
-    std::cout << "Num: " << sawa.num << std::endl;
+	Data kdot = {12, "kdot"};
+    uintptr_t a = Serializer::serialize(&kdot);
+    std::cout << "Unsigned int: " << a << std::endl;
+    std::cout << std::endl;
+    Data *god = Serializer::deserialize(a);
+	testTitle("Assert check... kdot == god ??");
+	assert(&kdot == god);
+	assert(kdot.num == god->num);
+	assert(kdot.name == god->name);
 
-    uintptr_t a = Serializer::serialize(&sawa);
-    std::cout << "\nUnsigned int: " << a << std::endl;
+    std::cout << "Address of kdot: " << &kdot << std::endl;
+    std::cout << "Name: " << kdot.name << std::endl;
+    std::cout << "Num: " << kdot.num << std::endl;
+    std::cout << std::endl;
+    std::cout << "Address of god: " << god << std::endl;
+    std::cout << "Name: " << god->name << std::endl;
+    std::cout << "Num: " << god->num << std::endl;
+    std::cout << std::endl;
 
-    Data *newsawa = Serializer::deserialize(a);
-    std::cout << "\nAddress of newsawa: " << newsawa << std::endl;
-    std::cout << "Name: " << newsawa->name << std::endl;
-    std::cout << "Num: " << newsawa->num << std::endl;
+	testTitle("Assert check... Jcole == god ??");
+	god->num = 81;
+	god->name = "Jcole";
+	assert(&kdot == god);
+	assert(kdot.num == god->num);
+	assert(kdot.name == god->name);
 
-	assert(&sawa == newsawa);
-	assert(&sawa != newsawa);
-	newsawa->num = 81;
-    std::cout << "Address of sawa: " << &sawa << std::endl;
-    std::cout << "Name: " << sawa.name << std::endl;
-    std::cout << "Num: " << sawa.num << std::endl;
+    std::cout << "Address of Jcole: " << &kdot << std::endl;
+    std::cout << "Name: " << kdot.name << std::endl;
+    std::cout << "Num: " << kdot.num << std::endl;
+    std::cout << std::endl;
+    std::cout << "Address of god: " << god << std::endl;
+    std::cout << "Name: " << god->name << std::endl;
+    std::cout << "Num: " << god->num << std::endl;
 
 }

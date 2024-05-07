@@ -9,11 +9,18 @@
 
 #define CHAR_START 32
 #define CHAR_END 126
+#define POSITIVE_INF "+inf"
+#define NEGATIVE_INF "-inf"
+#define IMPOSSIBLE "impossible"
+#define PRINT_CHAR "char: "
+#define PRINT_INT "int: "
+#define PRINT_FLOAT "float: "
+#define PRINT_DOUBLE "double: "
 
 bool isNan(std::string literal) { return (literal == "nan"); }
 
 bool isInf(std::string literal) {
-  return (literal == "-inf" || literal == "+inf");
+  return (literal == POSITIVE_INF || literal == NEGATIVE_INF);
 }
 
 int isSpace(int c) {
@@ -70,16 +77,16 @@ int getType(std::string literal) {
 }
 
 void ScalarConverter::printError() {
-  std::cout << "Char: impossible" << std::endl;
-  std::cout << "Int: impossible" << std::endl;
-  std::cout << "Float: impossible" << std::endl;
-  std::cout << "Double: impossible" << std::endl;
+  std::cout << PRINT_CHAR << IMPOSSIBLE << std::endl;
+  std::cout << PRINT_INT << IMPOSSIBLE << std::endl;
+  std::cout << PRINT_FLOAT << IMPOSSIBLE << std::endl;
+  std::cout << PRINT_DOUBLE << IMPOSSIBLE << std::endl;
 }
 
 void ScalarConverter::checkOverflowChar(int nb, bool isNan) {
   if (isNan || nb < static_cast<int>(std::numeric_limits<char>::min()) ||
       static_cast<int>(std::numeric_limits<char>::max()) < nb)
-    std::cout << "Char: impossible" << std::endl;
+    std::cout << PRINT_CHAR << IMPOSSIBLE << std::endl;
   else
     ScalarConverter::printChar_(static_cast<char>(nb));
 }
@@ -90,7 +97,7 @@ void ScalarConverter::checkOverflowInt(const std::string &literal) {
 
   ss >> nb;
   if (ss.fail())
-    std::cout << "Int: impossible" << std::endl;
+    std::cout << PRINT_INT << IMPOSSIBLE << std::endl;
   else
     ScalarConverter::printInt_(nb);
 }
@@ -128,14 +135,14 @@ void ScalarConverter::convert(std::string literal) {
       double nb = stringToDouble_(literal);
       if (nb < static_cast<double>(std::numeric_limits<float>::min()) ||
           static_cast<double>(std::numeric_limits<float>::max()) < nb) {
-        std::cout << "Char: impossible" << std::endl;
-        std::cout << "Int: impossible" << std::endl;
+        std::cout << PRINT_CHAR << IMPOSSIBLE << std::endl;
+        std::cout << PRINT_INT << IMPOSSIBLE << std::endl;
         if (nb == std::numeric_limits<double>::infinity())
-          std::cout << "Float: +inff" << std::endl;
+          std::cout << PRINT_FLOAT << POSITIVE_INF << "f" << std::endl;
         else if (nb == -std::numeric_limits<double>::infinity())
-          std::cout << "Float: -inff" << std::endl;
+          std::cout << PRINT_FLOAT << NEGATIVE_INF << "f" << std::endl;
         else
-          std::cout << "Float: impossible" << std::endl;
+          std::cout << PRINT_FLOAT << IMPOSSIBLE << std::endl;
       } else {
         checkOverflowChar(static_cast<int>(nb), isNan(literal));
         checkOverflowInt(literal);
@@ -148,7 +155,7 @@ void ScalarConverter::convert(std::string literal) {
 }
 
 void ScalarConverter::printChar_(const char c) {
-  std::cout << "Char: ";
+  std::cout << PRINT_CHAR;
   if (c < CHAR_START || CHAR_END < c)
     std::cerr << "Non displayable";
   else
@@ -157,29 +164,29 @@ void ScalarConverter::printChar_(const char c) {
 }
 
 void ScalarConverter::printInt_(const int nb) {
-  std::cout << "Int: " << nb << std::endl;
+  std::cout << PRINT_INT << nb << std::endl;
 }
 
 void ScalarConverter::printFloat_(const float nb) {
   if (nb == std::numeric_limits<float>::infinity()) {
-    std::cout << "Double: +inf";
+    std::cout << PRINT_FLOAT << POSITIVE_INF;
+  } else if (nb == -std::numeric_limits<float>::infinity()) {
+    std::cout << PRINT_FLOAT << NEGATIVE_INF;
   } else {
-    std::cout << "Float: " << nb;
-    if (nb != -std::numeric_limits<float>::infinity() &&
-        (nb - std::floor(nb)) <= 0.0f)
-      std::cout << ".0";
+    std::cout << PRINT_FLOAT << nb;
+    if ((nb - std::floor(nb)) <= 0.0f) std::cout << ".0";
   }
   std::cout << "f" << std::endl;
 }
 
 void ScalarConverter::printDouble_(const double nb) {
   if (nb == std::numeric_limits<double>::infinity()) {
-    std::cout << "Double: +inf";
+    std::cout << PRINT_DOUBLE << POSITIVE_INF;
+  } else if (nb == -std::numeric_limits<double>::infinity()) {
+    std::cout << PRINT_DOUBLE << NEGATIVE_INF;
   } else {
-    std::cout << "Double: " << nb;
-    if (nb != -std::numeric_limits<double>::infinity() &&
-        (nb - std::floor(nb)) <= 0.0f)
-      std::cout << ".0";
+    std::cout << PRINT_DOUBLE << nb;
+    if ((nb - std::floor(nb)) <= 0.0f) std::cout << ".0";
   }
   std::cout << std::endl;
 }
@@ -200,7 +207,7 @@ float ScalarConverter::stringToFloat_(std::string const &literal) {
   if (isNan(literal))
     nb = std::numeric_limits<float>::quiet_NaN();
   else if (isInf(literal)) {
-    if (literal == "+inf")
+    if (literal == POSITIVE_INF)
       nb = std::numeric_limits<float>::infinity();
     else
       nb = -std::numeric_limits<float>::infinity();
@@ -216,7 +223,7 @@ double ScalarConverter::stringToDouble_(std::string const &literal) {
   if (isNan(literal))
     nb = std::numeric_limits<double>::quiet_NaN();
   else if (isInf(literal)) {
-    if (literal == "+inf")
+    if (literal == POSITIVE_INF)
       nb = std::numeric_limits<double>::infinity();
     else
       nb = -std::numeric_limits<double>::infinity();
