@@ -4,7 +4,7 @@
 #include <cstddef>
 
 template <typename T>
-void iter(T* array, std::size_t len, void (*f)(T&)) {
+void iter(T* array, const std::size_t& len, void (*f)(T&)) {
   if (!array || !f) return;
   for (std::size_t i = 0; i < len; i++) {
     f(array[i]);
@@ -14,6 +14,11 @@ void iter(T* array, std::size_t len, void (*f)(T&)) {
 template <typename U>
 void test(U& value) {
   std::cout << "Value: " << value << std::endl;
+}
+
+template <typename U>
+void add(U& value) {
+  value++;
 }
 
 #endif
