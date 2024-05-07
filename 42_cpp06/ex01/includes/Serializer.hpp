@@ -1,7 +1,7 @@
 #ifndef EX01_SERIALIZER_HPP_
 #define EX01_SERIALIZER_HPP_
 
-#include <cstdint>
+#include <stdint.h>
 #include <string>
 
 struct Data {
