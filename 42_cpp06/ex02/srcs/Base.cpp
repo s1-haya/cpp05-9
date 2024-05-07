@@ -2,6 +2,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <typeinfo>
 
 #include "A.hpp"
 #include "B.hpp"
@@ -32,15 +33,15 @@ Base* generate(void) {
 }
 
 void identify(Base* p) {
-	if (dynamic_cast<A*>(p))
-		std::cout << "A";
-	else if (dynamic_cast<B*>(p))
-		std::cout << "B";
-	else if (dynamic_cast<C*>(p))
-		std::cout << "C";
-	else
-		std::cerr << "Base pointer isn't Class A, B, C.";
-	std::cout << std::endl;
+  if (dynamic_cast<A*>(p))
+    std::cout << "A";
+  else if (dynamic_cast<B*>(p))
+    std::cout << "B";
+  else if (dynamic_cast<C*>(p))
+    std::cout << "C";
+  else
+    std::cerr << "Base pointer isn't Class A, B, C.";
+  std::cout << std::endl;
 }
 
 void identify(Base& p) {
