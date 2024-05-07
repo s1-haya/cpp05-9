@@ -12,7 +12,7 @@ class ScalarConverter {
  private:
   ScalarConverter();
   ScalarConverter(const ScalarConverter& other);
-  ScalarConverter& operator=(const ScalarConverter&  other);
+  ScalarConverter& operator=(const ScalarConverter& other);
   ~ScalarConverter();
 
   static void printChar_(const char c);
@@ -24,6 +24,10 @@ class ScalarConverter {
   static int stringToInt_(std::string const& literal);
   static float stringToFloat_(std::string const& literal);
   static double stringToDouble_(std::string const& literal);
+
+  static void printError();
+  static void checkOverflowChar(int nb, bool isNan);
+  static void checkOverflowInt(const std::string& literal);
 };
 
 #endif

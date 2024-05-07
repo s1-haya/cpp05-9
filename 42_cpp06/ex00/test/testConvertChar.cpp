@@ -14,6 +14,10 @@ void testConverterChar(void) {
   ScalarConverter::convert("3");
   std::cout << std::endl;
   testTitle("ERROR CASE");
+  ScalarConverter::convert("128");
+  std::cout << std::endl;
+  ScalarConverter::convert("-129");
+  std::cout << std::endl;
   ScalarConverter::convert("\t");
   std::cout << std::endl;
   ScalarConverter::convert("\v");
