@@ -28,6 +28,10 @@ int isSpace(int c) {
           c == '\r');
 }
 
+int isDigit(int c) {
+  return ('0' <= c && c <= '9');
+}
+
 bool isChar(std::string literal) {
   return (literal.size() == 1 && (!('0' <= literal[0] && literal[0] <= '9')));
 }
@@ -46,6 +50,7 @@ bool isFloat(std::string literal) {
   if (literal[literal.length() - 1] == 'f')
     literal = literal.erase(literal.length() - 1);
   if (isInf(literal) || isNan(literal)) return (true);
+  if (literal.find('.') == std::string::npos || literal[literal.length() - 1] == '.') return (false);
   std::stringstream stream(literal);
   float a;
 
@@ -56,6 +61,7 @@ bool isFloat(std::string literal) {
 
 bool isDouble(std::string literal) {
   if (isInf(literal) || isNan(literal)) return (true);
+  if (literal.find('.') == std::string::npos) return (false);
   std::stringstream stream(literal);
   double a;
 
@@ -133,10 +139,22 @@ void ScalarConverter::convert(std::string literal) {
     }
     case DOUBLE: {
       double nb = stringToDouble_(literal);
+      // std::cout << "double: "<< nb << std::endl;
+      // std::cout << "double: "<< (std::numeric_limits<int>::min()) << std::endl;
+      // std::cout << "double: "<< static_cast<double>(std::numeric_limits<float>::min()) << std::endl;
+        // std::cout << PRINT_CHAR << IMPOSSIBLE << std::endl;
+      if (static_cast<double>(std::numeric_limits<char>::min()) <= nb && 
+        nb <= static_cast<double>(std::numeric_limits<char>::max()))
+        ScalarConverter::printChar_(static_cast<char>(nb));
+      else
+        std::cout << PRINT_CHAR << IMPOSSIBLE << std::endl;
+      if (nb < static_cast<double>(std::numeric_limits<int>::min()) || 
+        static_cast<double>(std::numeric_limits<int>::max()) < nb)
+        std::cout << PRINT_INT << IMPOSSIBLE << std::endl;
+      else
+        ScalarConverter::printInt_(static_cast<int>(nb));
       if (nb < static_cast<double>(std::numeric_limits<float>::min()) ||
           static_cast<double>(std::numeric_limits<float>::max()) < nb) {
-        std::cout << PRINT_CHAR << IMPOSSIBLE << std::endl;
-        std::cout << PRINT_INT << IMPOSSIBLE << std::endl;
         if (nb == std::numeric_limits<double>::infinity())
           std::cout << PRINT_FLOAT << POSITIVE_INF << "f" << std::endl;
         else if (nb == -std::numeric_limits<double>::infinity())
@@ -144,8 +162,8 @@ void ScalarConverter::convert(std::string literal) {
         else
           std::cout << PRINT_FLOAT << IMPOSSIBLE << std::endl;
       } else {
-        checkOverflowChar(static_cast<int>(nb), isNan(literal));
-        checkOverflowInt(literal);
+        // checkOverflowChar(static_cast<int>(nb), isNan(literal));
+        // checkOverflowInt(literal);
         ScalarConverter::printFloat_(nb);
       }
       ScalarConverter::printDouble_(nb);

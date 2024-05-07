@@ -7,6 +7,10 @@ void testConverterDouble(void) {
   testTitle("Test Convert Double");
   ScalarConverter::convert("42.0");
   std::cout << std::endl;
+  ScalarConverter::convert("2147483647.0");
+  std::cout << std::endl;
+  ScalarConverter::convert("2147483648.0");
+  std::cout << std::endl;
   ScalarConverter::convert("1.7976931348623157e+308");
   std::cout << std::endl;
   ScalarConverter::convert("2.2250738585072014e-308");

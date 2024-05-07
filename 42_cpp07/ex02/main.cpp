@@ -2,7 +2,10 @@
 
 #include "whatever.hpp"
 
-enum Type { A, B };
+struct Data {
+  int num;
+  std::string name;
+};
 
 int main(void) {
   std::cout << "--- <int> ---" << std::endl;
@@ -33,25 +36,13 @@ int main(void) {
   std::cout << "floatA = " << floatA << ", floatB = " << floatB << std::endl;
   std::cout << "min( floatA, floatB ) = " << ::min(floatA, floatB) << std::endl;
   std::cout << "max( floatA, floatB ) = " << ::max(floatA, floatB) << std::endl;
-  std::cout << "--- <Type> ---" << std::endl;
-  Type typeA = A;
-  Type typeB = B;
-  std::cout << "typeA = " << typeA << ", typeB = " << typeB << std::endl;
-  swap(typeA, typeB);
-  std::cout << "typeA = " << typeA << ", typeB = " << typeB << std::endl;
-  std::cout << "min( typeA, typeB ) = " << ::min(typeA, typeB) << std::endl;
-  std::cout << "max( typeA, typeB ) = " << ::max(typeA, typeB) << std::endl;
-  std::cout << "--- <Pointer> ---" << std::endl;
-  const char* pointerA = "a";
-  const char* pointerB = "b";
-  std::cout << "pointerA = " << pointerA << ", pointerB = " << pointerB
-            << std::endl;
-  swap(pointerA, pointerB);
-  std::cout << "pointerA = " << pointerA << ", pointerB = " << pointerB
-            << std::endl;
-  std::cout << "min( pointerA, pointerB ) = " << ::min(pointerA, pointerB)
-            << std::endl;
-  std::cout << "max( pointerA, pointerB ) = " << ::max(pointerA, pointerB)
-            << std::endl;
+  std::cout << "--- <Data> ---" << std::endl;
+  Data dataA = {12, "kdot"};
+  Data dataB = {15, "drake"};
+  std::cout << "dataA = " << dataA << ", dataB = " << dataB << std::endl;
+  swap(dataA, dataB);
+  std::cout << "dataA = " << dataA << ", dataB = " << dataB << std::endl;
+  std::cout << "min( dataA, dataB ) = " << ::min(dataA, dataB) << std::endl;
+  std::cout << "max( dataA, dataB ) = " << ::max(dataA, dataB) << std::endl;
   return 0;
 }

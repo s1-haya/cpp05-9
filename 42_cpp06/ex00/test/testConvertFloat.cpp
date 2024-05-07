@@ -26,6 +26,10 @@ void testConverterFloat(void) {
   std::cout << std::endl;
   ScalarConverter::convert("2.0f ");
   std::cout << std::endl;
+  ScalarConverter::convert("-21474836480.f");
+  std::cout << std::endl;
+  ScalarConverter::convert("-21474836480f");
+  std::cout << std::endl;
   ScalarConverter::convert("3.40282347e+40F");
   std::cout << std::endl;
   ScalarConverter::convert("1.17549435e-40F");
