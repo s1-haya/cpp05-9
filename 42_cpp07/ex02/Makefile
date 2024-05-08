@@ -1,7 +1,6 @@
 NAME := ./practice_templates
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MP
-# CXXFLAGS += -pedantic-errors
 
 SRCS_DIR := srcs
 SRCS := main.cpp\

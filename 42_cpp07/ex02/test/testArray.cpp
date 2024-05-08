@@ -6,22 +6,26 @@ void testTitle(const std::string title);
 
 void testArray(void) {
   testTitle("Template Array Test");
-  testTitle("Default Constructor");
   try {
+    testTitle("Whether the value calling the default constructor is an empty array\n- Expect: index out of range");
     Array<char *> arrayCharPtr;
-    // don't implement testIsNULL because throw in Array<T>::operator[];
-    testIsNULL(arrayCharPtr[0]);
+    (void)arrayCharPtr[0];
   } catch (const std::exception& e) {
     std::cerr << e.what() << std::endl;
   }
   try {
+    testTitle("Whether memory is allocated according to the number of elements\n- Expect: OK");
     Array<char *> arrayCharPtr(4);
     for (size_t i = 0; i < 4; i++) {
-      	std::cout << "memory: " << &(arrayCharPtr[i]) << std::endl;
+        testIsNULL(arrayCharPtr[i]);
     }
-    assert(arrayCharPtr[0] == NULL); 
-    // std::cout << arrayCharPtr[0] << std::endl;
-    testIsNULL(arrayCharPtr[0]);
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+  }
+  try {
+    testTitle("Whether memory is not allocated according to the number of elements equals zero\n- Expect: index out of range and not double free");
+    Array<char *> arrayCharPtr(0);
+    (void)arrayCharPtr;
   } catch (const std::exception& e) {
     std::cerr << e.what() << std::endl;
   }
@@ -33,14 +37,24 @@ void testArray(void) {
       arrayInt[i] = i;
     }
     Array<int> copyArrayInt(arrayInt);
+    testTitle("Whether the Copy Constructor Array<T> is a different pointer\n- Expect: OK");
     testNotAssert(&arrayInt, &copyArrayInt);
     for (unsigned int i = 0; i < size; i++) {
       testNotAssert(&(arrayInt[i]), &(copyArrayInt[i]));
     }
+    testTitle("Whether the Copy Constructor Array<T> is a same value\n- Expect: OK");
+    for (unsigned int i = 0; i < size; i++) {
+      testAssert(arrayInt[i], copyArrayInt[i]);
+    }
+    testTitle("Whether the Assignment Array<T> is a different pointer\n- Expect: OK");
     Array<int> assignmentArrayInt;
     assignmentArrayInt = arrayInt;
     for (unsigned int i = 0; i < size; i++) {
       testNotAssert(&(arrayInt[i]), &(assignmentArrayInt[i]));
+    }
+    testTitle("Whether the Assignment Array<T> is a same value\n- Expect: OK");
+    for (unsigned int i = 0; i < size; i++) {
+      testAssert(arrayInt[i], assignmentArrayInt[i]);
     }
   } catch (const std::exception& e) {
     std::cout << e.what() << std::endl;

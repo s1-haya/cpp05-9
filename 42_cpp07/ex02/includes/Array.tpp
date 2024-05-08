@@ -5,11 +5,12 @@ template <typename T>
 Array<T>::Array() : array_(new T[0]), size_(0){};
 
 template <typename T>
-Array<T>::Array(const unsigned int n) : array_(new T[n]), size_(n){};
+Array<T>::Array(unsigned int n) : array_(new T[n]), size_(n){};
 
 template <typename T>
 Array<T>::~Array() {
-  delete[] array_;
+  if (this->size_ > 0)
+    delete[] array_;
 };
 
 template <typename T>
@@ -21,12 +22,12 @@ template <typename T>
 Array<T>::Array(const Array &other)
     : array_(new T[other.size_]), size_(other.size_) {
   for (unsigned int i = 0; i < other.size_; i++) {
-    array_[i] = other.array_[i];
+    this->array_[i] = other.array_[i];
   }
 };
 
 template <typename T>
-Array<T> &Array<T>::operator=(const T &other) {
+Array<T> &Array<T>::operator=(const Array<T> &other) {
   std::cout << "assignment" << std::endl;
   if (this != &other) {
     delete[] this->array_;
@@ -36,6 +37,7 @@ Array<T> &Array<T>::operator=(const T &other) {
       this->array_[i] = other[i];
     }
   }
+  std::cout << "assignment" << std::endl;
   return (*this);
 };
 

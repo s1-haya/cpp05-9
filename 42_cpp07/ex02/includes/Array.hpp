@@ -5,13 +5,12 @@ template <typename T>
 class Array {
  public:
   Array();
-  Array(const unsigned int n);
+  Array(unsigned int n);
   Array(const Array &other);
-  Array<T> &operator=(const T &other);
-  T &operator[](const unsigned int index) const;
-
-  unsigned int size() const;
   ~Array();
+  Array<T> &operator=(const Array<T> &other);
+  T &operator[](const unsigned int index) const;
+  unsigned int size() const;
 
  private:
   T *array_;
