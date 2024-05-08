@@ -9,10 +9,10 @@ void testMainCppInSubject(void) {
 	testTitle("Test Main.cpp In Subject");
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
-    srand(time(NULL));
+    std::srand(time(NULL));
     for (int i = 0; i < MAX_VAL; i++)
     {
-        const int value = rand();
+        const int value = std::rand();
         numbers[i] = value;
         mirror[i] = value;
     }
@@ -49,7 +49,7 @@ void testMainCppInSubject(void) {
 
     for (int i = 0; i < MAX_VAL; i++)
     {
-        numbers[i] = rand();
+        numbers[i] = std::rand();
     }
     delete [] mirror;//
 }
