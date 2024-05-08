@@ -1,6 +1,4 @@
 #include "Array.hpp"
-
-#include <cstdint>
 #include <iostream>
 
 template <typename T>
