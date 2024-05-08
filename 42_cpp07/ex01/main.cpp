@@ -9,11 +9,11 @@ struct Data {
 
 int main(void) {
   int A[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-  std::cout << "before Add: output "<< std::endl;
+  std::cout << "before Add: output " << std::endl;
   iter(A, sizeof(A) / sizeof(A[0]), &test);
-  std::cout << ""<< std::endl;
+  std::cout << "" << std::endl;
   iter(A, sizeof(A) / sizeof(A[0]), &add);
-  std::cout << "after Add: output "<< std::endl;
+  std::cout << "after Add: output " << std::endl;
   iter(A, sizeof(A) / sizeof(A[0]), &test);
   std::cout << std::endl;
   const char *B[5] = {"az", "bz", "cz", "dz", "ez"};

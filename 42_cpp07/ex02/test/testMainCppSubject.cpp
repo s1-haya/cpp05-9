@@ -1,56 +1,46 @@
-#include <iostream>
 #include <Array.hpp>
 #include <cstdlib>
+#include <iostream>
 
 #define MAX_VAL 750
 
 void testTitle(const std::string title);
 
 void testMainCppInSubject(void) {
-	testTitle("Test Main.cpp In Subject");
-    Array<int> numbers(MAX_VAL);
-    int* mirror = new int[MAX_VAL];
-    std::srand(time(NULL));
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        const int value = std::rand();
-        numbers[i] = value;
-        mirror[i] = value;
-    }
-    //SCOPE
-    {
-        Array<int> tmp = numbers;
-        Array<int> test(tmp);
-    }
+  testTitle("Test Main.cpp In Subject");
+  Array<int> numbers(MAX_VAL);
+  int* mirror = new int[MAX_VAL];
+  std::srand(time(NULL));
+  for (int i = 0; i < MAX_VAL; i++) {
+    const int value = std::rand();
+    numbers[i] = value;
+    mirror[i] = value;
+  }
+  // SCOPE
+  {
+    Array<int> tmp = numbers;
+    Array<int> test(tmp);
+  }
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        if (mirror[i] != numbers[i])
-        {
-            std::cerr << "didn't save the same value!!" << std::endl;
-            return ;
-        }
+  for (int i = 0; i < MAX_VAL; i++) {
+    if (mirror[i] != numbers[i]) {
+      std::cerr << "didn't save the same value!!" << std::endl;
+      return;
     }
-    try
-    {
-        numbers[-2] = 0;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    try
-    {
-        numbers[MAX_VAL] = 0;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+  }
+  try {
+    numbers[-2] = 0;
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << '\n';
+  }
+  try {
+    numbers[MAX_VAL] = 0;
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << '\n';
+  }
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        numbers[i] = std::rand();
-    }
-    delete [] mirror;//
+  for (int i = 0; i < MAX_VAL; i++) {
+    numbers[i] = std::rand();
+  }
+  delete[] mirror;  //
 }

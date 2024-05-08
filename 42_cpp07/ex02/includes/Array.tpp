@@ -1,4 +1,5 @@
 #include "Array.hpp"
+
 #include <iostream>
 
 template <typename T>
@@ -9,7 +10,7 @@ Array<T>::Array(unsigned int n) : array_(new T[n]), size_(n){};
 
 template <typename T>
 Array<T>::~Array() {
-    delete[] array_;
+  delete[] array_;
 };
 
 template <typename T>
