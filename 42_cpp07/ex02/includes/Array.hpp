@@ -1,8 +1,5 @@
-#ifndef EX00_WHATEVER_HPP_
-#define EX00_WHATEVER_HPP_
-
-#include <cstdint>
-#include <iostream>
+#ifndef EX02_ARRAY_HPP_
+#define EX02_ARRAY_HPP_
 
 template <typename T>
 class Array {
@@ -10,7 +7,7 @@ class Array {
   Array();
   Array(const unsigned int n);
   Array(const Array &other);
-  const T &operator=(const T &other);
+  Array<T> &operator=(const T &other);
   T &operator[](const unsigned int index) const;
 
   unsigned int size() const;
