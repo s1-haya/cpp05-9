@@ -9,7 +9,6 @@ Array<T>::Array(unsigned int n) : array_(new T[n]), size_(n){};
 
 template <typename T>
 Array<T>::~Array() {
-  if (this->size_ > 0)
     delete[] array_;
 };
 

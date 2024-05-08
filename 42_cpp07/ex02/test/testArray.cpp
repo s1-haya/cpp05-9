@@ -17,7 +17,7 @@ void testArray(void) {
     testTitle("Whether memory is allocated according to the number of elements\n- Expect: OK");
     Array<char *> arrayCharPtr(4);
     for (size_t i = 0; i < 4; i++) {
-        testIsNULL(arrayCharPtr[i]);
+        testIsNULL(&(arrayCharPtr[i]));
     }
   } catch (const std::exception& e) {
     std::cerr << e.what() << std::endl;
