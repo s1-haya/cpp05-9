@@ -20,7 +20,7 @@ unsigned int Array<T>::size() const {
 
 template <typename T>
 Array<T>::Array(const Array &other)
-    : array_(new T[other.size_]()), size_(other.size_) {
+    : array_(new T[other.size_]), size_(other.size_) {
   for (unsigned int i = 0; i < other.size_; i++) {
     this->array_[i] = other.array_[i];
   }
@@ -30,7 +30,7 @@ template <typename T>
 Array<T> &Array<T>::operator=(const Array<T> &other) {
   if (this != &other) {
     delete[] this->array_;
-    this->array_ = new T[other.size_]();
+    this->array_ = new T[other.size_];
     this->size_ = other.size_;
     for (unsigned int i = 0; i < other.size_; i++) {
       this->array_[i] = other[i];
