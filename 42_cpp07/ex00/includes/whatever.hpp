@@ -10,6 +10,8 @@ void swap(T& a, T& b) {
 
 template <typename T>
 T const& min(T const& a, T const& b) {
+  std::cout << "a: "<< a << std::endl;
+  std::cout << "b: "<< b << std::endl;
   return ((a < b) ? a : b);
 }
 

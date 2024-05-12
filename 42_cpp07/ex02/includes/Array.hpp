@@ -1,6 +1,8 @@
 #ifndef EX02_ARRAY_HPP_
 #define EX02_ARRAY_HPP_
 
+#include <iostream>
+
 template <typename T>
 class Array {
  public:
@@ -9,7 +11,8 @@ class Array {
   Array(const Array &other);
   ~Array();
   Array<T> &operator=(const Array<T> &other);
-  T &operator[](const unsigned int index) const;
+  T &operator[](std::size_t index);
+  T const &operator[](std::size_t index) const;
   unsigned int size() const;
 
  private:

@@ -1,10 +1,16 @@
-NAME := ./practice_templates
+NAME := ./practice_template
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MP
 # CXXFLAGS += -pedantic-errors
 
 SRCS_DIR := srcs
 SRCS := main.cpp\
+		$(SRCS_DIR)/Span.cpp\
+
+TEST_DIR := test
+SRCS += $(TEST_DIR)/test.cpp\
+		$(TEST_DIR)/testTitle.cpp\
+		$(TEST_DIR)/testSpan.cpp\
 
 OBJS_DIR := objs
 OBJS := $(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS))
@@ -18,7 +24,7 @@ INCLUDES := -I./includes
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(OBJS) -o $@
+	$(CXX) $(CXXFLAGS) $(OBJS) $(INCLUDES) -o $@
 
 $(OBJS_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)

@@ -23,7 +23,7 @@ INCLUDES := -I./includes
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) $(INCLUDES) -o $@
+	$(CXX) $(OBJS) -o $@
 
 $(OBJS_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)

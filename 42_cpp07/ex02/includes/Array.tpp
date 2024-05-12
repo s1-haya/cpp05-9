@@ -21,7 +21,7 @@ unsigned int Array<T>::size() const {
 template <typename T>
 Array<T>::Array(const Array &other)
     : array_(new T[other.size_]), size_(other.size_) {
-  for (unsigned int i = 0; i < other.size_; i++) {
+  for (std::size_t i = 0; i < other.size_; i++) {
     this->array_[i] = other.array_[i];
   }
 };
@@ -29,10 +29,11 @@ Array<T>::Array(const Array &other)
 template <typename T>
 Array<T> &Array<T>::operator=(const Array<T> &other) {
   if (this != &other) {
+    T* tmp = new T[other.size_];
     delete[] this->array_;
-    this->array_ = new T[other.size_];
+    this->array_ = tmp;
     this->size_ = other.size_;
-    for (unsigned int i = 0; i < other.size_; i++) {
+    for (std::size_t i = 0; i < other.size_; i++) {
       this->array_[i] = other[i];
     }
   }
@@ -40,7 +41,15 @@ Array<T> &Array<T>::operator=(const Array<T> &other) {
 };
 
 template <typename T>
-T &Array<T>::operator[](const unsigned int index) const {
+T &Array<T>::operator[](std::size_t index) {
+  if (index >= this->size_) {
+    throw(std::out_of_range("Index out of range"));
+  }
+  return (this->array_[index]);
+};
+
+template <typename T>
+T const &Array<T>::operator[](std::size_t index) const {
   if (index >= this->size_) {
     throw(std::out_of_range("Index out of range"));
   }
@@ -50,7 +59,7 @@ T &Array<T>::operator[](const unsigned int index) const {
 template <typename T>
 std::ostream &operator<<(std::ostream &os, const Array<T> &array) {
   unsigned int size = array.size();
-  for (unsigned int i = 0; i < size; i++) {
+  for (std::size_t i = 0; i < size; i++) {
     os << "value[" << i << "]: " << array[i] << std::endl;
   }
   return (os);

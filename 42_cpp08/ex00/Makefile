@@ -1,10 +1,15 @@
 NAME := ./practice_templates
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MP
-# CXXFLAGS += -pedantic-errors
 
 SRCS_DIR := srcs
 SRCS := main.cpp\
+
+TEST_DIR := test
+SRCS += $(TEST_DIR)/test.cpp\
+		$(TEST_DIR)/testTitle.cpp\
+		$(TEST_DIR)/testListInt.cpp\
+		$(TEST_DIR)/testVectorInt.cpp\
 
 OBJS_DIR := objs
 OBJS := $(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS))
