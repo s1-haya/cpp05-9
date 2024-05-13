@@ -5,26 +5,19 @@
 #include <stack>
 
 template <typename T>
-class MutantStack {
- private:
-  std::stack<T, std::deque<T> > stack;
-  std::deque<T> c;
-
+class MutantStack : public std::stack<T>{
  public:
-  typedef
-      typename std::deque<T>::iterator iterator;
   MutantStack();
   MutantStack(const MutantStack &other);
   MutantStack &operator=(const MutantStack &other);
   ~MutantStack();
-  void push(const T &value);
-  void pop();
-  T &top();
-  const T &top() const;
-  bool empty() const;
-  size_t size() const;
+  typedef typename std::stack<T>::container_type container;
+  typedef typename container::iterator iterator;
+  typedef typename container::reverse_iterator reverse_iterator;
   iterator begin();
   iterator end();
+  reverse_iterator rbegin();
+  reverse_iterator rend();
 };
 
 #include "MutantStack.tpp"
