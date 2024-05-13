@@ -18,8 +18,7 @@ void testArray(void) {
   }
   try {
     testTitle(
-        "Whether the value calling the default constructor is an empty "
-        "array\n- Expect: index out of range");
+        "Whether reading array<T> if array<T> is const.\n");
     Array<int> arrayInt(2);
     arrayInt[0] = 42;
     const Array<int> arrayCopyInt(arrayInt);
