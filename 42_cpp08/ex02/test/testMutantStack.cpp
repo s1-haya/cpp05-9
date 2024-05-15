@@ -12,15 +12,33 @@ void testSpan(void) {
     for (std::size_t i = 0; i < 5; i++) {
       a.push(i);
     }
-    std::cout << "Iterataor: ";
+    std::cout << "iterataor: ";
     for (std::deque<int>::iterator it = a.begin(); it != a.end(); it++) {
       std::cout << *it << " ";
+      // compile ok
+      // *it = 10;
     }
     std::cout << std::endl;
-    std::cout << "Iterataor Reverse: ";
+    std::cout << "const iterataor: ";
+    for (std::deque<int>::const_iterator it = a.begin(); it != a.end(); it++) {
+      std::cout << *it << " ";
+      // compile error: cannot assign to return value because function 'operator*' returns a const value
+      // *it = 42;
+    }
+    std::cout << std::endl;
+    std::cout << "iterataor Reverse: ";
     for (std::deque<int>::reverse_iterator it = a.rbegin(); it != a.rend();
          it++) {
       std::cout << *it << " ";
+      // *it = 42;
+    }
+    std::cout << std::endl;
+    std::cout << "const iterataor Reverse: ";
+    for (std::deque<int>::const_reverse_iterator it = a.rbegin(); it != a.rend();
+         it++) {
+      std::cout << *it << " ";
+      // compile error: cannot assign to return value because function 'operator*' returns a const value
+      // *it = 42;
     }
     std::cout << std::endl;
     std::cout << "empty: ";
