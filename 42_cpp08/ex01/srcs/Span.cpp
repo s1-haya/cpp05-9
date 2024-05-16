@@ -23,16 +23,12 @@ void Span::addNumber(int n) {
 }
 
 void Span::addRandomNumbers(std::size_t n, int min, int max) {
-  try {
-    if (min > max) throw(std::range_error("min is greater than max"));
-    size_t range = max - min;
-    if (RAND_MAX < range)
-      throw(std::range_error("range is greater than RAND_MAX"));
-    for (std::size_t i = 0; i < n; i++) {
-      this->addNumber((int)(std::rand() % (range + 1)) + min);
-    }
-  } catch (const std::exception &e) {
-    std::cerr << e.what() << std::endl;
+  if (min > max) throw(std::range_error("min is greater than max"));
+  size_t range = max - min;
+  if (RAND_MAX < range)
+    throw(std::range_error("range is greater than RAND_MAX"));
+  for (std::size_t i = 0; i < n; i++) {
+    this->addNumber((int)(std::rand() % (range + 1)) + min);
   }
 }
 

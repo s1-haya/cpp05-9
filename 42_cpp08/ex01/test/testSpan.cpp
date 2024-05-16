@@ -85,24 +85,86 @@ void testSpan(void) {
   }
 
   try {
+    testTitle("AddRandomNumbers: throw an exception when min is greator than max");
+    Span sp10(10);
+    sp10.addRandomNumbers(10, 42, -42);
+    std::cout << RED << "KO" << DEFAULT <<  std::endl;
+    sp10.printStorage();
+  } catch (const std::exception& e) {
+    std::cout << GREEN << "OK" << DEFAULT <<  std::endl;
+    std::cerr << e.what() << std::endl;
+  }
+
+  try {
+    testTitle("AddRandomNumbers: throw an exception when N is greator than storage max size");
+    Span sp10(10);
+    sp10.addRandomNumbers(20, 1, 42);
+    std::cout << RED << "KO" << DEFAULT <<  std::endl;
+    sp10.printStorage();
+  } catch (const std::exception& e) {
+    std::cout << GREEN << "OK" << DEFAULT <<  std::endl;
+    std::cerr << e.what() << std::endl;
+  }
+
+  try {
+    testTitle("AddRandomNumbers: throw an exception when range from min to max is greator than RANDOM_MAX");
+    Span sp10(10);
+    sp10.addRandomNumbers(10, INT_MIN, INT_MAX);
+    std::cout << RED << "KO" << DEFAULT <<  std::endl;
+    sp10.printStorage();
+  } catch (const std::exception& e) {
+    std::cout << GREEN << "OK" << DEFAULT <<  std::endl;
+    std::cerr << e.what() << std::endl;
+  }
+
+  try {
     Span sp2 = Span(10000);
-    testTitle("Storage 10000");
+    testTitle("Storage max size is 10000.");
     size_t storage = 10000;
     std::cout << "storage_size: " << sp2.getStorageSize() << std::endl;
     testNotAssert(storage, sp2.getStorageSize());
-    sp2.addRandomNumbers(storage, 1, 1);
-    testAssert(storage, sp2.getStorageSize());
-    // sp2.addRandomNumbers(storage, INT_MIN, INT_MIN);
-    // sp2.addRandomNumbers(storage, INT_MAX, INT_MAX);
-    // error: implicit conversion from 'long' to 'int' changes value from
-    // -2147483649 to 2147483647 sp2.addRandomNumbers(storage, -2147483649,
-    // INT_MIN); error: implicit conversion from 'long' to 'int' changes value
-    // from 2147483648 to -2147483648 sp2.addRandomNumbers(storage, 2147483648,
-    // INT_MAX); sp2.printStorage();
-    //		sp2.addNumber(1);
+    sp2.addRandomNumbers(storage, 1, 100);
     std::cout << "storage_size: " << sp2.getStorageSize() << std::endl;
-    std::cout << "sp2.shortestSpan() = " << sp2.shortestSpan() << std::endl;
-    std::cout << "sp2.longestSpan() = " << sp2.longestSpan() << std::endl;
+    testAssert(storage, sp2.getStorageSize());
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+  }
+
+  try {
+    Span sp2 = Span(1000000);
+    testTitle("Storage max size is 1000000.");
+    size_t storage = 1000000;
+    std::cout << "storage_size: " << sp2.getStorageSize() << std::endl;
+    testNotAssert(storage, sp2.getStorageSize());
+    sp2.addRandomNumbers(storage, 1, 100);
+    std::cout << "storage_size: " << sp2.getStorageSize() << std::endl;
+    testAssert(storage, sp2.getStorageSize());
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+  }
+
+  try {
+    Span sp2 = Span(10000000);
+    testTitle("Storage max size is 10000000.");
+    size_t storage = 10000000;
+    std::cout << "storage_size: " << sp2.getStorageSize() << std::endl;
+    testNotAssert(storage, sp2.getStorageSize());
+    sp2.addRandomNumbers(storage, 1, 100);
+    std::cout << "storage_size: " << sp2.getStorageSize() << std::endl;
+    testAssert(storage, sp2.getStorageSize());
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+  }
+
+  try {
+    Span sp2 = Span(100000000);
+    testTitle("Storage max size is 100000000.");
+    size_t storage = 100000000;
+    std::cout << "storage_size: " << sp2.getStorageSize() << std::endl;
+    testNotAssert(storage, sp2.getStorageSize());
+    sp2.addRandomNumbers(storage, 1, 100);
+    std::cout << "storage_size: " << sp2.getStorageSize() << std::endl;
+    testAssert(storage, sp2.getStorageSize());
   } catch (const std::exception& e) {
     std::cerr << e.what() << std::endl;
   }
