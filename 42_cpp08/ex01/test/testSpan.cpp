@@ -11,35 +11,52 @@ void testSpan(void) {
   srand(time(NULL));
   try {
     testTitle("Min Shortest and Max Longest in Span Class");
-    Span sp = Span(3);
-    sp.printStorage();
-    sp.addNumber(2147483647);
-    sp.addNumber(-2147483648);
-    sp.addNumber(2147483647);
-    sp.printStorage();
+    Span sp3 = Span(3);
+    sp3.printStorage();
+    sp3.addNumber(2147483647);
+    sp3.addNumber(-2147483648);
+    sp3.addNumber(2147483647);
+    sp3.printStorage();
     size_t expect_short = 0;
-    testAssert(expect_short, sp.shortestSpan());
+    testAssert(expect_short, sp3.shortestSpan());
     size_t expect_long = 2147483647 + 2147483648;
-    testAssert(expect_long, sp.longestSpan());
+    testAssert(expect_long, sp3.longestSpan());
   } catch (const std::exception& e) {
     std::cout << e.what() << std::endl;
   }
 
   try {
-    testTitle("ShortestSpan: this storage are no numbers stored, throw an exception");
-    Span sp0(0);
-    std::cout << sp0.shortestSpan() << std::endl;
-    sp0.printStorage();
+    testTitle("Any attempt to add a new element if there are already N elements stored should throw an exception");
+    Span sp1(1);
+    sp1.addNumber(1);
+    sp1.addNumber(2);
+    std::cout << RED << "KO" << DEFAULT <<  std::endl;
   } catch (const std::exception& e) {
+    std::cout << GREEN << "OK" << DEFAULT <<  std::endl;
     std::cerr << e.what() << std::endl;
   }
 
   try {
-    testTitle("LongestSpan: this storage are no numbers stored, throw an exception");
+    testTitle(
+        "ShortestSpan: this storage are no numbers stored, throw an exception");
     Span sp0(0);
-    std::cout << sp0.longestSpan() << std::endl;
+    std::cout << sp0.shortestSpan() << std::endl;
+    std::cout << RED << "KO" << DEFAULT <<  std::endl;
     sp0.printStorage();
   } catch (const std::exception& e) {
+    std::cout << GREEN << "OK" << DEFAULT <<  std::endl;
+    std::cerr << e.what() << std::endl;
+  }
+
+  try {
+    testTitle(
+        "LongestSpan: this storage are no numbers stored, throw an exception");
+    Span sp0(0);
+    std::cout << sp0.longestSpan() << std::endl;
+    std::cout << RED << "KO" << DEFAULT <<  std::endl;
+    sp0.printStorage();
+  } catch (const std::exception& e) {
+    std::cout << GREEN << "OK" << DEFAULT <<  std::endl;
     std::cerr << e.what() << std::endl;
   }
 
@@ -48,8 +65,10 @@ void testSpan(void) {
     Span sp1(1);
     sp1.addNumber(42);
     std::cout << sp1.shortestSpan() << std::endl;
+    std::cout << RED << "KO" << DEFAULT <<  std::endl;
     sp1.printStorage();
   } catch (const std::exception& e) {
+    std::cout << GREEN << "OK" << DEFAULT <<  std::endl;
     std::cerr << e.what() << std::endl;
   }
 
@@ -58,8 +77,10 @@ void testSpan(void) {
     Span sp1(1);
     sp1.addNumber(42);
     std::cout << sp1.longestSpan() << std::endl;
+    std::cout << RED << "KO" << DEFAULT <<  std::endl;
     sp1.printStorage();
   } catch (const std::exception& e) {
+    std::cout << GREEN << "OK" << DEFAULT <<  std::endl;
     std::cerr << e.what() << std::endl;
   }
 
