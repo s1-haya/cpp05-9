@@ -37,7 +37,7 @@ void Span::addRandomNumbers(std::size_t n, int min, int max) {
 }
 
 unsigned long Span::shortestSpan() {
-  if (this->storage_.size() < 2) throw(std::range_error("Not enough..."));
+  if (this->storage_.size() < 2) throw(std::range_error("Storage does not contain enough elements to calculate the shortest span. At least 2 elements are required."));
   std::sort(this->storage_.begin(), this->storage_.end());
   unsigned long shortest = this->storage_.at(1) - this->storage_.at(0);
   for (std::size_t i = 1; i < this->storage_.size() - 1; i++) {
@@ -48,7 +48,7 @@ unsigned long Span::shortestSpan() {
 }
 
 unsigned long Span::longestSpan() {
-  if (this->storage_.size() < 2) throw(std::range_error("Not enough..."));
+  if (this->storage_.size() < 2) throw(std::range_error("Storage does not contain enough elements to calculate the longest span. At least 2 elements are required."));
   long min = *(std::min_element(this->storage_.begin(), this->storage_.end()));
   long max = *(std::max_element(this->storage_.begin(), this->storage_.end()));
   unsigned long longest = max - min;
