@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "Span.hpp"
+#include "testAssert.hpp"
 
 void testTitle(const std::string title);
 
@@ -37,11 +38,11 @@ void testSpan(void) {
     std::cout << e.what() << std::endl;
   }
 
-  try {
-    sp.addNumber(42);
-  } catch (const std::exception& e) {
-    std::cerr << e.what() << std::endl;
-  }
+  // try {
+  //   sp.addNumber(42);
+  // } catch (const std::exception& e) {
+  //   std::cerr << e.what() << std::endl;
+  // }
 
   Span sp0 = Span(0);
   sp0.printStorage();
@@ -60,11 +61,21 @@ void testSpan(void) {
     std::cerr << e.what() << std::endl;
   }
 
-  << std::endl;
-  Span sp2 = Span(100);
-  sp2.addRandomNumbers(100);
-  sp2.printStorage();
+  Span sp2 = Span(10000);
   try {
+    size_t storage = 10000;
+    std::cout << "storage_size: " << sp2.getStorageSize() << std::endl;
+    testNotAssert(storage, sp2.getStorageSize());
+    sp2.addRandomNumbers(storage, 1, 1);
+    testAssert(storage, sp2.getStorageSize());
+    // sp2.addRandomNumbers(storage, INT_MIN, INT_MIN);
+    // sp2.addRandomNumbers(storage, INT_MAX, INT_MAX);
+    // error: implicit conversion from 'long' to 'int' changes value from -2147483649 to 2147483647 
+    // sp2.addRandomNumbers(storage, -2147483649, INT_MIN);
+    // error: implicit conversion from 'long' to 'int' changes value from 2147483648 to -2147483648 
+    // sp2.addRandomNumbers(storage, 2147483648, INT_MAX);
+    // sp2.printStorage();
+    std::cout << "storage_size: " << sp2.getStorageSize() << std::endl;
     //		sp2.addNumber(1);
     std::cout << "sp2.shortestSpan() = " << sp2.shortestSpan() << std::endl;
     std::cout << "sp2.longestSpan() = " << sp2.longestSpan() << std::endl;

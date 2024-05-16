@@ -7,8 +7,8 @@
 class Span{
 public:
 	Span(unsigned int N);
-	Span(const Span &to_copy);
-	Span &operator=(const Span &to_copy);
+	Span(const Span &other);
+	Span &operator=(const Span &other);
 	~Span();
 
 	void addNumber(int n);
@@ -17,6 +17,7 @@ public:
 	size_t longestSpan();
 
 	void printStorage();
+	size_t getStorageSize() const;
 
 private:
 	unsigned int max_size_;

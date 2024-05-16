@@ -29,7 +29,7 @@ void Span::addRandomNumbers(std::size_t n, int min, int max) {
     if (RAND_MAX < range)
       throw(std::range_error("range is greater than RAND_MAX"));
     for (std::size_t i = 0; i < n; i++) {
-      this->addNumber((std::rand() % range) + min);
+      this->addNumber((int)(std::rand() % (range + 1)) + min);
     }
   } catch (const std::exception &e) {
     std::cerr << e.what() << std::endl;
@@ -66,4 +66,8 @@ void Span::printStorage() {
     std::cout << "This storage is empty because nothing has been stored yet";
   }
   std::cout << std::endl;
+}
+
+size_t Span::getStorageSize() const {
+  return (this->storage_.size());
 }
