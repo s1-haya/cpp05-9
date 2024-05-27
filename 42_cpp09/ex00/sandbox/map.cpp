@@ -41,11 +41,11 @@ int main(void) {
     ++it;
   }
 
-  std::cout << "map: 2022-02-20 " << map["2022-02-20"] << std::endl;
-  std::cout << "map: 2022-02-20 " << map["2022-02-19"] << std::endl;
-  std::cout << "map: 2022-02-20 " << map["2022-02-20" - 1] << std::endl;
-  std::cout << "map: 2022-02-20 " << map["2022-02-19" - 1] << std::endl;
-  std::cout << "map: 2022-02-20 " << map["2022-02-19" - 2] << std::endl;
-  std::cout << "map: 2022-02-20 " << map["2022-02-19" - 3] << std::endl;
+//   std::cout << "map: 2022-02-20 " << map["2022-02-20"] << std::endl;
+//   std::cout << "map: 2022-02-20 " << map["2022-02-19"] << std::endl;
+//   std::cout << "map: 2022-02-20 " << map["2022-02-20" - 1] << std::endl;
+//   std::cout << "map: 2022-02-20 " << map["2022-02-19" - 1] << std::endl;
+//   std::cout << "map: 2022-02-20 " << map["2022-02-19" - 2] << std::endl;
+//   std::cout << "map: 2022-02-20 " << map["2022-02-19" - 3] << std::endl;
   return 0;
 }
