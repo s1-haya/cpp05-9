@@ -17,22 +17,25 @@ typedef std::map<int, MonthData> YearData;
 void addData(YearData& map, const std::string& line);
 void printData(const YearData& data);
 
-int main(void) {
+YearData getDataDotCsv() {
   std::ifstream file("data.csv");
   if (!file.is_open()) {
     std::cerr << "Error: " << std::endl;
-    return (1);
   }
 
   std::string line;
   if (!std::getline(file, line)) {
     std::cerr << "Error: Unable to read the header line" << std::endl;
-    return (1);
   }
   YearData map;
   while (std::getline(file, line)) {
     addData(map, line);
   }
-  printData(map);
-  return 0;
+  return map;
 }
+
+// int main(void) {
+//   YearData map = getDataDotCsv();
+//   printData(map);
+//   return 0;
+// }

@@ -3,9 +3,7 @@
 #include <sstream>
 #include <string>
 
-// フォーマットが正しいかどうかをチェックする関数
 bool isValid(const std::string& line) {
-  // 正しい形式の例: "YYYY-MM-DD | value"
   size_t separatorPos = line.find(" | ");
   if (separatorPos == std::string::npos) {
     std::cerr << "Error: not | " << std::endl;
