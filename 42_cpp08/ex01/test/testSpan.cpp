@@ -1,5 +1,6 @@
 #include <cassert>
 #include <cstdlib>
+#include <climits>
 #include <iostream>
 
 #include "Span.hpp"
