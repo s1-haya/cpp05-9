@@ -8,6 +8,7 @@ SRCS := main.cpp\
 TEST_DIR := test
 SRCS += $(TEST_DIR)/test.cpp\
 		$(TEST_DIR)/testTitle.cpp\
+		$(TEST_DIR)/color.cpp\
 		$(TEST_DIR)/testListInt.cpp\
 		$(TEST_DIR)/testVectorInt.cpp\
 
