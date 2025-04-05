@@ -4,13 +4,13 @@
 #include <sstream>
 #include <string>
 
-typedef std::map<int, float> DayData;
-typedef std::map<int, DayData> MonthData;
-typedef std::map<int, MonthData> YearData;
-void addData(YearData& map, const std::string& line);
-void printData(const YearData& data);
+typedef std::map<int, float> DayBitcoin;
+typedef std::map<int, DayBitcoin> MonthBitcoin;
+typedef std::map<int, MonthBitcoin> YearBitcoin;
+void addBitcoin(YearBitcoin& map, const std::string& line);
+void printBitcoin(const YearBitcoin& Bitcoin);
 
-YearData getDataDotCsv();
+YearBitcoin getBitcoin();
 
 bool checkValid(const std::string& line) {
   size_t separatorPos = line.find(" | ");
@@ -73,16 +73,16 @@ bool checkValid(const std::string& line) {
     return false;
   }
 
-  YearData data = getDataDotCsv();
-  for (YearData::const_iterator yearIt = data.begin(); yearIt != data.end();
-       ++yearIt) {
+  YearBitcoin Bitcoin = getBitcoin();
+  for (YearBitcoin::const_iterator yearIt = Bitcoin.begin();
+       yearIt != Bitcoin.end(); ++yearIt) {
     if (yearIt->first == year) {
       std::cout << year << dash1;
-      for (MonthData::const_iterator monthIt = yearIt->second.begin();
+      for (MonthBitcoin::const_iterator monthIt = yearIt->second.begin();
            monthIt != yearIt->second.end(); ++monthIt) {
         if (monthIt->first == month) {
           std::cout << month << dash2;
-          for (DayData::const_iterator dayIt = monthIt->second.begin();
+          for (DayBitcoin::const_iterator dayIt = monthIt->second.begin();
                dayIt != monthIt->second.end(); ++dayIt) {
             if (dayIt->first > day) {
               dayIt--;
@@ -105,7 +105,7 @@ int main(void) {
 
   std::cout << std::endl;
 
-  std::cout << "Error: not 'value | data'" << std::endl;
+  std::cout << "Error: not 'value | Bitcoin'" << std::endl;
   checkValid(" 2011-01-03 - 3");
   checkValid(" 2011-01-03 | 3");
   checkValid("2011-01-03 | 3 ");
