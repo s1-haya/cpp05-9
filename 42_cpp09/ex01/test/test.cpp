@@ -4,6 +4,4 @@ void testRPN(void);
 
 void runTest(void) {
   testRPN();
-  // testVectorInt();
-  // testListInt();
 }

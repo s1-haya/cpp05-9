@@ -2,8 +2,13 @@ NAME := RPN
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MP
 
+ifeq ($(DEBUG), 1)
+  CXXFLAGS += -DDEBUG
+endif
+
 SRCS_DIR := srcs
 SRCS := main.cpp\
+		$(SRCS_DIR)/RPN.cpp\
 
 TEST_DIR := test
 SRCS += $(TEST_DIR)/test.cpp\
@@ -36,8 +41,9 @@ fclean: clean
 
 re: fclean all
 
-test: re
-	$(NAME)
+test:
+	$(MAKE) re DEBUG=1
+	./$(NAME)
 
 leak: re
 	valgrind --leak-check=full $(NAME)
