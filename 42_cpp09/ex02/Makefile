@@ -4,11 +4,11 @@ CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MP
 
 SRCS_DIR := srcs
 SRCS := main.cpp\
+		$(SRCS_DIR)/PmergeMe.cpp\
 
 TEST_DIR := test
-SRCS += $(TEST_DIR)/test.cpp\
-		$(TEST_DIR)/testTitle.cpp\
-		$(TEST_DIR)/testPmergeMe.cpp
+SRCS += $(TEST_DIR)/testTitle.cpp\
+
 
 OBJS_DIR := objs
 OBJS := $(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS))
