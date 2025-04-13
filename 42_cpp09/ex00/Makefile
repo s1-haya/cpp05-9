@@ -6,11 +6,6 @@ SRCS_DIR := srcs
 SRCS := main.cpp\
 		$(SRCS_DIR)/BitcoinExchange.cpp\
 
-TEST_DIR := test
-SRCS += $(TEST_DIR)/test.cpp\
-		$(TEST_DIR)/testTitle.cpp\
-		$(TEST_DIR)/testBitcoinExchange.cpp
-
 OBJS_DIR := objs
 OBJS := $(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS))
 
@@ -36,9 +31,6 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
-
-test: re
-	./$(NAME)
 
 leak: re
 	valgrind --leak-check=full $(NAME)

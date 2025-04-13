@@ -2,6 +2,7 @@
 #define EX00_EASYFIND_HPP_
 
 #include <string.h>
+
 #include <map>
 
 typedef std::map<int, float> DayBitcoin;
@@ -13,7 +14,7 @@ typedef std::map<int, MonthBitcoin> YearBitcoin;
 
 class BitcoinExchange {
  public:
-  BitcoinExchange(const std::string &bitcoinFile="data.csv");
+  BitcoinExchange(const std::string &bitcoinFile = "test/data.csv");
   ~BitcoinExchange();
   BitcoinExchange(const BitcoinExchange &other);
   BitcoinExchange &operator=(const BitcoinExchange &other);
@@ -25,8 +26,7 @@ class BitcoinExchange {
   YearBitcoin getBitcoin();
   void processInputLine(const YearBitcoin &bitcoin, const std::string &line);
   int validateInputFile(const YearBitcoin &bitcoin,
-						 const std::string &filename);
-
+                        const std::string &filename);
 };
 
 #endif
