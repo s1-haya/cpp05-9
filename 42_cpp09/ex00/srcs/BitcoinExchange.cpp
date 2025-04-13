@@ -1,12 +1,8 @@
+#include "BitcoinExchange.hpp"
+
 #include <fstream>
 #include <iostream>
-#include <map>
 #include <sstream>
-#include <string>
-
-typedef std::map<int, float> DayBitcoin;
-typedef std::map<int, DayBitcoin> MonthBitcoin;
-typedef std::map<int, MonthBitcoin> YearBitcoin;
 
 template <typename T>
 typename T::const_iterator getLastIterator(const T& map) {
@@ -17,7 +13,33 @@ typename T::const_iterator getLastIterator(const T& map) {
   return lastIt;
 }
 
-void addBitcoin(YearBitcoin& map, const std::string& line) {
+BitcoinExchange::BitcoinExchange(const std::string& bitcoinFile)
+    : bitcoinFile(bitcoinFile) {}
+
+BitcoinExchange::~BitcoinExchange() {}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) {
+  *this = other;
+}
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
+  if (this != &other) {
+    this->bitcoinFile = other.bitcoinFile;
+  }
+  return *this;
+}
+
+int BitcoinExchange::process(const std::string& inputFile) {
+  try {
+    YearBitcoin bitcoin = getBitcoin();
+    return validateInputFile(bitcoin, inputFile);
+  } catch (const std::exception& e) {
+    std::cerr << "Error: " << e.what() << std::endl;
+    return ERROR;
+  }
+}
+
+void BitcoinExchange::addBitcoin(YearBitcoin& map, const std::string& line) {
   int year, month, day;
   float value;
   char dash;
@@ -26,19 +48,19 @@ void addBitcoin(YearBitcoin& map, const std::string& line) {
   map[year][month][day] = value;
 }
 
-YearBitcoin getBitcoin() {
-  std::ifstream file("data.csv");
+YearBitcoin BitcoinExchange::getBitcoin() {
+  std::ifstream file(this->bitcoinFile);
   if (!file.is_open()) {
-    std::cerr << "Error: " << std::endl;
+    throw std::runtime_error("CSV File not found");
   }
 
   std::string line;
   if (!std::getline(file, line)) {
-    std::cerr << "Error: Unable to read the header line" << std::endl;
+    throw std::runtime_error("Unable to read the header line in CSV file");
   }
   YearBitcoin map;
   if (line != "date,exchange_rate") {
-    std::cerr << "Error: Invalid header line" << std::endl;
+    throw std::runtime_error("Invalid header line in CSV file");
   }
   while (std::getline(file, line)) {
     addBitcoin(map, line);
@@ -78,12 +100,10 @@ void printCalculatedBitcoin(const YearBitcoin& bitcoin) {
   }
 }
 
-// void validate
-
-void validateInputLine(const YearBitcoin& bitcoin, const std::string& line) {
+void BitcoinExchange::processInputLine(const YearBitcoin& bitcoin,
+                                       const std::string& line) {
   std::istringstream stream(line);
   float input_value;
-  // validateInputValue(&input_value, line);
   int input_year, input_month, input_day;
 
   size_t delim_pos = line.find(" | ");
@@ -137,8 +157,10 @@ void validateInputLine(const YearBitcoin& bitcoin, const std::string& line) {
     return;
   }
 
-  if (std::sscanf(date_str.c_str(), "%d-%d-%d", &input_year, &input_month, &input_day) != 3) {
-    std::cerr << "Error: bad date format => \"" << date_str << "\"" << std::endl;
+  if (std::sscanf(date_str.c_str(), "%d-%d-%d", &input_year, &input_month,
+                  &input_day) != 3) {
+    std::cerr << "Error: bad date format => \"" << date_str << "\""
+              << std::endl;
     return;
   }
 
@@ -147,7 +169,6 @@ void validateInputLine(const YearBitcoin& bitcoin, const std::string& line) {
             << input_day << " | value = " << input_value << std::endl;
 #endif
 
-  // ===== Year の範囲チェック =====
   YearBitcoin::const_iterator firstYearIt = bitcoin.begin();
   YearBitcoin::const_iterator lastYearIt = getLastIterator(bitcoin);
   if (input_year < firstYearIt->first || input_year > lastYearIt->first) {
@@ -163,7 +184,6 @@ void validateInputLine(const YearBitcoin& bitcoin, const std::string& line) {
     return;
   }
 
-  // ===== Month の範囲チェック =====
   MonthBitcoin::const_iterator firstMonthIt = yearIt->second.begin();
   MonthBitcoin::const_iterator lastMonthIt = getLastIterator(yearIt->second);
   if (input_month < firstMonthIt->first || input_month > lastMonthIt->first) {
@@ -179,7 +199,6 @@ void validateInputLine(const YearBitcoin& bitcoin, const std::string& line) {
     return;
   }
 
-  // ===== Day の範囲チェック =====
   DayBitcoin::const_iterator firstDayIt = monthIt->second.begin();
   DayBitcoin::const_iterator lastDayIt = getLastIterator(monthIt->second);
   if (input_day < firstDayIt->first || input_day > lastDayIt->first) {
@@ -191,7 +210,7 @@ void validateInputLine(const YearBitcoin& bitcoin, const std::string& line) {
   DayBitcoin::const_iterator dayIt = monthIt->second.begin();
   DayBitcoin::const_iterator prevIt = monthIt->second.end();
   for (; dayIt != monthIt->second.end(); ++dayIt) {
-    if (dayIt->first >= input_day) {
+    if (dayIt->first > input_day) {
       break;
     }
     prevIt = dayIt;
@@ -201,42 +220,30 @@ void validateInputLine(const YearBitcoin& bitcoin, const std::string& line) {
     return;
   }
 
-  // ===== 計算・出力 =====
   float result = input_value * prevIt->second;
   std::cout << input_year << "-" << input_month << "-" << input_day << " => "
             << input_value << " = " << result << std::endl;
 }
 
-// ファイル読み込み処理
-void validateInputFile(const YearBitcoin& bitcoin,
-                       const std::string& filename) {
+int BitcoinExchange::validateInputFile(const YearBitcoin& bitcoin,
+                                       const std::string& filename) {
   std::ifstream inputFile(filename);
   if (!inputFile) {
     std::cerr << "Error: could not open file." << std::endl;
-    return;
+    return ERROR;
   }
 
   std::string line;
   if (!std::getline(inputFile, line)) {
     std::cerr << "Error: unable to read the header line" << std::endl;
-    return;
+    return ERROR;
   }
   if (line != "date | value") {
     std::cerr << "Error: invalid header line" << std::endl;
-    return;
+    return ERROR;
   }
   while (std::getline(inputFile, line)) {
-    validateInputLine(bitcoin, line);
+    processInputLine(bitcoin, line);
   }
-}
-
-int main(int argc, char** argv) {
-  if (argc != 2) {
-    std::cerr << "Usage: ./btc <input_file>" << std::endl;
-    return 1;
-  }
-
-  YearBitcoin bitcoin = getBitcoin();
-  validateInputFile(bitcoin, argv[1]);
-  return 0;
+  return SUCCESS;
 }

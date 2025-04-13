@@ -4,6 +4,7 @@ CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MP
 
 SRCS_DIR := srcs
 SRCS := main.cpp\
+		$(SRCS_DIR)/BitcoinExchange.cpp\
 
 TEST_DIR := test
 SRCS += $(TEST_DIR)/test.cpp\
@@ -37,7 +38,7 @@ fclean: clean
 re: fclean all
 
 test: re
-	$(NAME)
+	./$(NAME)
 
 leak: re
 	valgrind --leak-check=full $(NAME)
