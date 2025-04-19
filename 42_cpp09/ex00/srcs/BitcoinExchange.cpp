@@ -41,7 +41,7 @@ int BitcoinExchange::process(const std::string& inputFile) {
 
 void BitcoinExchange::addBitcoin(YearBitcoin& map, const std::string& line) {
   int year, month, day;
-  float value;
+  double value;
   char dash;
   std::istringstream stream(line);
   stream >> year >> dash >> month >> dash >> day >> dash >> value;
@@ -103,7 +103,7 @@ void printCalculatedBitcoin(const YearBitcoin& bitcoin) {
 void BitcoinExchange::processInputLine(const YearBitcoin& bitcoin,
                                        const std::string& line) {
   std::istringstream stream(line);
-  float input_value;
+  double input_value;
   int input_year, input_month, input_day;
 
   size_t delim_pos = line.find(" | ");
@@ -220,7 +220,7 @@ void BitcoinExchange::processInputLine(const YearBitcoin& bitcoin,
     return;
   }
 
-  float result = input_value * prevIt->second;
+  double result = input_value * prevIt->second;
   std::cout << input_year << "-" << input_month << "-" << input_day << " => "
             << input_value << " = " << result << std::endl;
 }

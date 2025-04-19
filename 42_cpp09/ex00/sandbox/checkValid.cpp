@@ -4,7 +4,7 @@
 #include <sstream>
 #include <string>
 
-typedef std::map<int, float> DayBitcoin;
+typedef std::map<int, double> DayBitcoin;
 typedef std::map<int, DayBitcoin> MonthBitcoin;
 typedef std::map<int, MonthBitcoin> YearBitcoin;
 void addBitcoin(YearBitcoin& map, const std::string& line);
@@ -62,7 +62,7 @@ bool checkValid(const std::string& line) {
     std::cout << "Error: -0 is not a valid value" << std::endl;
     return false;
   }
-  float value;
+  double value;
   if (!(valueStream >> value)) {
     std::cout << "Error: not Float type value " << std::endl;
     return false;

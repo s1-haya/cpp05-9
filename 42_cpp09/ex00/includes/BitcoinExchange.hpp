@@ -5,7 +5,7 @@
 
 #include <map>
 
-typedef std::map<int, float> DayBitcoin;
+typedef std::map<int, double> DayBitcoin;
 typedef std::map<int, DayBitcoin> MonthBitcoin;
 typedef std::map<int, MonthBitcoin> YearBitcoin;
 

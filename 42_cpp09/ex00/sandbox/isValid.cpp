@@ -46,7 +46,7 @@ bool isValid(const std::string& line) {
   }
 
   std::istringstream valueStream(valueStr);
-  float value;
+  double value;
   if (!(valueStream >> value)) {
     std::cerr << "Error: not Float type value " << std::endl;
     return false;

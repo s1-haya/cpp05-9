@@ -4,7 +4,7 @@
 #include <sstream>
 #include <string>
 
-typedef std::map<int, float> DayBitcoin;
+typedef std::map<int, double> DayBitcoin;
 typedef std::map<int, DayBitcoin> MonthBitcoin;
 typedef std::map<int, MonthBitcoin> YearBitcoin;
 
@@ -19,7 +19,7 @@ typename T::const_iterator getLastIterator(const T& map) {
 
 void addBitcoin(YearBitcoin& map, const std::string& line) {
   int year, month, day;
-  float value;
+  double value;
   char dash;
   std::istringstream stream(line);
   stream >> year >> dash >> month >> dash >> day >> dash >> value;
@@ -82,7 +82,7 @@ void printCalculatedBitcoin(const YearBitcoin& bitcoin) {
 
 void validateInputLine(const YearBitcoin& bitcoin, const std::string& line) {
   std::istringstream stream(line);
-  float input_value;
+  double input_value;
   // validateInputValue(&input_value, line);
   int input_year, input_month, input_day;
 
@@ -137,8 +137,10 @@ void validateInputLine(const YearBitcoin& bitcoin, const std::string& line) {
     return;
   }
 
-  if (std::sscanf(date_str.c_str(), "%d-%d-%d", &input_year, &input_month, &input_day) != 3) {
-    std::cerr << "Error: bad date format => \"" << date_str << "\"" << std::endl;
+  if (std::sscanf(date_str.c_str(), "%d-%d-%d", &input_year, &input_month,
+                  &input_day) != 3) {
+    std::cerr << "Error: bad date format => \"" << date_str << "\""
+              << std::endl;
     return;
   }
 
@@ -202,7 +204,7 @@ void validateInputLine(const YearBitcoin& bitcoin, const std::string& line) {
   }
 
   // ===== 計算・出力 =====
-  float result = input_value * prevIt->second;
+  double result = input_value * prevIt->second;
   std::cout << input_year << "-" << input_month << "-" << input_day << " => "
             << input_value << " = " << result << std::endl;
 }
