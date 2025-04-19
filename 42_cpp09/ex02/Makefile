@@ -6,10 +6,6 @@ SRCS_DIR := srcs
 SRCS := main.cpp\
 		$(SRCS_DIR)/PmergeMe.cpp\
 
-TEST_DIR := test
-SRCS += $(TEST_DIR)/testTitle.cpp\
-
-
 OBJS_DIR := objs
 OBJS := $(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS))
 

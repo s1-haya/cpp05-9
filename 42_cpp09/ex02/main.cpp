@@ -1,18 +1,18 @@
 #include "PmergeMe.hpp"
 
-void testTitle(const std::string& title);
-
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         std::cerr << "Error: Please provide a sequence of positive integers." << std::endl;
         return EXIT_FAILURE;
     }
 
-    testTitle("Vector Merge Insertion Sort");
+    std::cout << "Vector Merge Insertion Sort" << std::endl;
     PmergeMeVector vectorSorter(argc, argv);
     vectorSorter.sortAndPrint();
 	
-    testTitle("Deque Merge Insertion Sort");
+    std::cout << std::endl;
+
+    std::cout << "Deque Merge Insertion Sort" << std::endl;
     PmergeMeDeque dequeSorter(argc, argv);
     dequeSorter.sortAndPrint();
 
